@@ -14,7 +14,7 @@ angular.module('formioServiceTrackerApp').constant('AppConfig', {
   appUrl: appUrl,
   apiUrl: query.apiUrl || API_URL,
   company: query.company || 'Service Tracker',
-  icon: query.icon || '/assets/images/logo.png',
+  icon: query.icon || 'assets/images/logo.png',
   dealerLoginForm: appUrl + '/dealer/login',
   adminLoginForm: appUrl + '/admin/login',
   contractorLoginForm: appUrl + '/contractor/login',
