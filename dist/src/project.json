@@ -1,0 +1,3096 @@
+{
+  "title": "Service Tracker",
+  "description": "A service scheduling and tracking app.",
+  "version": "0.0.0",
+  "name": "servicetracker",
+  "preview": {
+    "url": "http://formio.github.io/formio-app-servicetracker",
+    "repo": "https://github.com/formio/formio-app-servicetracker"
+  },
+  "roles": {
+    "administrator": {
+      "title": "Administrator",
+      "description": "The Administrator Role.",
+      "admin": true,
+      "default": false
+    },
+    "agent": {
+      "title": "Contractor",
+      "description": "A Contractor",
+      "admin": false,
+      "default": false
+    },
+    "anonymous": {
+      "title": "Anonymous",
+      "description": "The Anonymous Role.",
+      "admin": false,
+      "default": true
+    },
+    "dealer": {
+      "title": "Dealer",
+      "description": "Role for Dealers",
+      "admin": false,
+      "default": false
+    }
+  },
+  "forms": {
+    "adminLoginForm": {
+      "title": "Admin Login",
+      "type": "form",
+      "name": "adminLogin",
+      "path": "admin/login",
+      "components": [
+        {
+          "suffix": "",
+          "prefix": "",
+          "validate": {
+            "required": true
+          },
+          "type": "email",
+          "persistent": true,
+          "defaultValue": "",
+          "unique": true,
+          "lockKey": true,
+          "input": true,
+          "placeholder": "Enter your email address",
+          "key": "admin.email",
+          "tableView": true,
+          "protected": false,
+          "label": "Admin Email",
+          "inputType": "email"
+        },
+        {
+          "input": true,
+          "validate": {
+            "required": true
+          },
+          "protected": true,
+          "persistent": true,
+          "lockKey": true,
+          "prefix": "",
+          "placeholder": "Enter your password",
+          "key": "admin.password",
+          "label": "Admin Password",
+          "type": "password",
+          "tableView": false,
+          "suffix": "",
+          "inputType": "password"
+        },
+        {
+          "theme": "primary",
+          "key": "submit",
+          "action": "submit",
+          "type": "button",
+          "tableView": false,
+          "leftIcon": "",
+          "disableOnInvalid": true,
+          "input": true,
+          "size": "md",
+          "block": false,
+          "rightIcon": "",
+          "label": "Submit"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "anonymous",
+            "agent",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": []
+        },
+        {
+          "type": "update_all",
+          "roles": []
+        },
+        {
+          "type": "delete_all",
+          "roles": []
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "anonymous"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "dealerLoginForm": {
+      "title": "Dealer Login",
+      "type": "form",
+      "name": "dealerLogin",
+      "path": "dealer/login",
+      "components": [
+        {
+          "source": "56954496823ab301001b14a1",
+          "lockKey": true,
+          "validate": {
+            "required": true
+          },
+          "type": "email",
+          "persistent": true,
+          "unique": true,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your dealer email",
+          "key": "dealer.email",
+          "label": "Dealer Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "source": "56954496823ab301001b14a1",
+          "lockKey": true,
+          "validate": {
+            "required": true
+          },
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "Enter your dealer password",
+          "key": "dealer.password",
+          "label": "Dealer Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": []
+        },
+        {
+          "type": "update_all",
+          "roles": []
+        },
+        {
+          "type": "delete_all",
+          "roles": []
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "anonymous"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "customerForm1": {
+      "title": "Customer Survey",
+      "type": "form",
+      "name": "customerSurvey",
+      "path": "survey",
+      "components": [
+        {
+          "type": "resource",
+          "validate": {
+            "required": true
+          },
+          "persistent": true,
+          "protected": false,
+          "multiple": false,
+          "searchFields": "",
+          "selectFields": "",
+          "template": "<span>{{ item.data }}</span>",
+          "defaultValue": "",
+          "resource": "customer",
+          "placeholder": "",
+          "key": "customer",
+          "label": "Customer",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "radio",
+          "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "required": true
+          },
+          "persistent": true,
+          "protected": false,
+          "defaultValue": "",
+          "values": [
+            {
+              "label": "Unsatisfied",
+              "value": "1"
+            },
+            {
+              "label": "Somewhat unsatisfied",
+              "value": "2"
+            },
+            {
+              "label": "Neutral",
+              "value": "3"
+            },
+            {
+              "label": "Somewhat satisfied",
+              "value": "4"
+            },
+            {
+              "label": "Satisfied",
+              "value": "5"
+            }
+          ],
+          "key": "howsatisfiedareyouwiththeserviceyoureceived",
+          "label": "How satisfied are you with the service you received",
+          "inputType": "radio",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "contractorLoginForm": {
+      "title": "Contractor Login",
+      "type": "form",
+      "name": "contractorLogin",
+      "path": "contractor/login",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "inputType": "email",
+          "label": "Contractor Email",
+          "key": "contractor.email",
+          "placeholder": "Enter the email address",
+          "prefix": "",
+          "suffix": "",
+          "defaultValue": "",
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "type": "email",
+          "validate": {
+            "required": true
+          },
+          "lockKey": true,
+          "source": "56954496823ab301001b149c",
+          "isNew": false
+        },
+        {
+          "input": true,
+          "tableView": false,
+          "inputType": "password",
+          "label": "Contractor Password",
+          "key": "contractor.password",
+          "placeholder": "Enter your contractor password",
+          "prefix": "",
+          "suffix": "",
+          "protected": true,
+          "persistent": true,
+          "type": "password",
+          "validate": {
+            "required": true
+          },
+          "lockKey": true,
+          "source": "56954496823ab301001b149c",
+          "isNew": false
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": []
+        },
+        {
+          "type": "update_all",
+          "roles": []
+        },
+        {
+          "type": "delete_all",
+          "roles": []
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "anonymous"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "serviceAgreement": {
+      "title": "Service Agreement",
+      "type": "form",
+      "name": "serviceAgreement",
+      "path": "agreement",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Customer",
+          "key": "customer",
+          "placeholder": "",
+          "resource": "customer",
+          "defaultValue": "",
+          "template": "<span>{{ item.data }}</span>",
+          "selectFields": "",
+          "searchFields": "",
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": false
+          },
+          "type": "resource"
+        },
+        {
+          "input": false,
+          "html": "<h1 style=\"margin-bottom: 0in; page-break-after: avoid;\">Customer Service Agreement</h1>\n\n<p>&nbsp;</p>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">The following services, products and parts are not covered by this Service Agreement: Damage from flooding, lighting, fire, theft, vandalism, and other acts of God.</p>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Excluded Services:<strong> </strong></p>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Customer understands and agrees that services required to recover from failures and/or incidents caused by any of the following circumstances are not considered normal maintenance and are not covered under this Service Agreement:</p>\n\n<ul>\n\t<li>Service and repair made necessary due to accidents or acts of God, damage from fire, water, wind, earthquakes, lightning, terrorism, transporting equipment, vandalism, or burglary;</li>\n\t<li>Service and repair made necessary by the alteration or modification of equipment other than that authorized by Seller;</li>\n\t<li>Service and repair of damage or problems caused by neglect, malicious activity, or misuse including, without limitation, use of the system(s) for purpose other than which it was designed, by the Customer, its employees, or third-party contractors;</li>\n\t<li>Service or repair due to electrical damage caused by electrical wiring at system location or resulting from electrical surges, sags, or spikes;</li>\n\t<li>Service and repair made necessary by bugs released by software vendors, e.g. adverse effects from installing updates or service packs;</li>\n\t<li>If in the reasonable opinion of Seller, as supported by its experience, any particular user&#39;s requests exceed a normal and reasonable frequency, Seller may advise the Customer that the user&#39;s requests are excluded until such time as the user has received additional training.</li>\n</ul>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Excluded Third Party Costs:</p>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Customer understands and agrees that the following third party costs are not covered by the fees set forth in this Service Agreement and shall be charged by Seller to Customer:</p>\n\n<ul>\n\t<li>Labor, parts, hardware and software not covered by warranties;</li>\n\t<li>Software licenses, subscription or upgrade fees;</li>\n\t<li>Manufacturer or vendor support fees, whether by annual contract or per incident;</li>\n\t<li>Shipping costs.</li>\n</ul>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Additional Projects:</p>\n\n<p style=\"margin-bottom: 0in; page-break-after: avoid\">Customer may occasionally require additional or amended services outside of the terms of this Service Agreement (collectively, &ldquo;Additional Projects&rdquo;). Seller will provide a detailed scope of work and labor quote for any Additional Project required by Customer. Customer will be required to execute a change order for any Additional Project before any work for such Project is performed and understands that a separate invoice(s) will be generated for such work. Examples of Additional Projects include:</p>\n\n<ul>\n\t<li>Software development, programming, debugging, or customization except as expressly specified in this Service Agreement;</li>\n\t<li>Cost to bring Customer&rsquo;s environment up to minimum standards required by Seller;</li>\n\t<li>Training and coaching;</li>\n\t<li>Planning, project management, research, and advisory consulting services;</li>\n</ul>\n",
+          "type": "content",
+          "isNew": true
+        },
+        {
+          "hideLabel": true,
+          "type": "signature",
+          "validate": {
+            "required": false
+          },
+          "persistent": true,
+          "protected": false,
+          "maxWidth": "2.5",
+          "minWidth": "0.5",
+          "backgroundColor": "rgb(245,245,235)",
+          "penColor": "black",
+          "height": "150px",
+          "width": "100%",
+          "footer": "Sign above",
+          "placeholder": "",
+          "key": "signature",
+          "label": "Signature",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "dealer"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "partReplacement": {
+      "title": "PartReplacement",
+      "type": "form",
+      "name": "partReplacement",
+      "path": "partreplacement",
+      "components": [
+        {
+          "input": false,
+          "tag": "h4",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "className": "",
+          "content": "Dealer Info:",
+          "type": "htmlelement"
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "columns": [
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Dealer",
+                      "key": "contractor.dealer",
+                      "placeholder": "",
+                      "resource": "dealer",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+                      "selectFields": "",
+                      "searchFields": [
+                        "data.name__regex"
+                      ],
+                      "multiple": false,
+                      "protected": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": true
+                      },
+                      "type": "resource",
+                      "lockKey": true,
+                      "source": "56a3bf05e0a91b010033c46a",
+                      "isNew": false
+                    }
+                  ]
+                },
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Assigned Contractor",
+                      "key": "appointment.assignedContractor",
+                      "placeholder": "Contractor",
+                      "resource": "agent",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+                      "selectFields": "",
+                      "searchFields": [
+                        "data.name__regex"
+                      ],
+                      "multiple": false,
+                      "protected": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": true
+                      },
+                      "type": "resource",
+                      "lockKey": true,
+                      "source": "56a3bf05e0a91b010033c46c",
+                      "isNew": false
+                    }
+                  ]
+                }
+              ],
+              "type": "columns",
+              "isNew": true
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "dealerContractorInfo",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": false,
+          "tag": "h4",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "className": "",
+          "content": "Original Part:",
+          "type": "htmlelement"
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "columns": [
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Select Manufacturer",
+                      "key": "selectManufacturer",
+                      "placeholder": "If not listed, select other.",
+                      "data": {
+                        "values": [
+                          {
+                            "value": "1",
+                            "label": "Other"
+                          },
+                          {
+                            "value": "2",
+                            "label": "American Standard"
+                          },
+                          {
+                            "value": "3",
+                            "label": "Carrier"
+                          },
+                          {
+                            "value": "4",
+                            "label": "Bryant"
+                          },
+                          {
+                            "value": "5",
+                            "label": "Rheem"
+                          },
+                          {
+                            "value": "6",
+                            "label": "Payne"
+                          },
+                          {
+                            "value": "7",
+                            "label": "TopTech"
+                          },
+                          {
+                            "value": "8",
+                            "label": "Tradepro"
+                          },
+                          {
+                            "value": "9",
+                            "label": "Gree E-Tac"
+                          },
+                          {
+                            "value": "10",
+                            "label": "Founten"
+                          },
+                          {
+                            "value": "11",
+                            "label": "Copeland"
+                          },
+                          {
+                            "value": "12",
+                            "label": "Grandaire"
+                          },
+                          {
+                            "value": "13",
+                            "label": "Heil"
+                          }
+                        ],
+                        "json": "",
+                        "url": ""
+                      },
+                      "dataSrc": "values",
+                      "valueProperty": "",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.label }}</span>",
+                      "multiple": false,
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false
+                      },
+                      "type": "select"
+                    },
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "inputType": "text",
+                      "inputMask": "",
+                      "label": "Other Manufacturer",
+                      "key": "otherManufacturer",
+                      "placeholder": "Type in manufacturer if not listed above.",
+                      "prefix": "",
+                      "suffix": "",
+                      "multiple": false,
+                      "defaultValue": "",
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false,
+                        "minLength": "",
+                        "maxLength": "",
+                        "pattern": "",
+                        "custom": "",
+                        "customPrivate": false
+                      },
+                      "type": "textfield",
+                      "isNew": false
+                    },
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "inputType": "text",
+                      "inputMask": "",
+                      "label": "Manufacturer #",
+                      "key": "manufacturer2",
+                      "placeholder": "",
+                      "prefix": "",
+                      "suffix": "",
+                      "multiple": false,
+                      "defaultValue": "",
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false,
+                        "minLength": "",
+                        "maxLength": "",
+                        "pattern": "",
+                        "custom": "",
+                        "customPrivate": false
+                      },
+                      "type": "textfield",
+                      "isNew": false
+                    }
+                  ]
+                },
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "inputType": "text",
+                      "inputMask": "",
+                      "label": "Part #",
+                      "key": "part",
+                      "placeholder": "",
+                      "prefix": "",
+                      "suffix": "",
+                      "multiple": false,
+                      "defaultValue": "",
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false,
+                        "minLength": "",
+                        "maxLength": "",
+                        "pattern": "",
+                        "custom": "",
+                        "customPrivate": false
+                      },
+                      "type": "textfield",
+                      "isNew": false
+                    },
+                    {
+                      "type": "textfield",
+                      "validate": {
+                        "customPrivate": false,
+                        "custom": "",
+                        "pattern": "",
+                        "maxLength": "",
+                        "minLength": "",
+                        "required": false
+                      },
+                      "persistent": true,
+                      "unique": false,
+                      "protected": false,
+                      "defaultValue": "",
+                      "multiple": false,
+                      "suffix": "",
+                      "prefix": "",
+                      "placeholder": "",
+                      "key": "partDescription",
+                      "label": "Part Description",
+                      "inputMask": "",
+                      "inputType": "text",
+                      "tableView": true,
+                      "input": true
+                    }
+                  ]
+                }
+              ],
+              "type": "columns",
+              "isNew": true
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "originalPart",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": false,
+          "tag": "h4",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "className": "",
+          "content": "New Part:",
+          "type": "htmlelement"
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "columns": [
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Select Manufacturer",
+                      "key": "selectManufacturer2",
+                      "placeholder": "",
+                      "data": {
+                        "values": [
+                          {
+                            "value": "other",
+                            "label": "Other"
+                          },
+                          {
+                            "value": "americanStandard",
+                            "label": "American Standard"
+                          },
+                          {
+                            "value": "carrier",
+                            "label": "Carrier"
+                          },
+                          {
+                            "value": "bryant",
+                            "label": "Bryant"
+                          },
+                          {
+                            "value": "rheem",
+                            "label": "Rheem"
+                          },
+                          {
+                            "value": "payne",
+                            "label": "Payne"
+                          },
+                          {
+                            "value": "topTech",
+                            "label": "TopTech"
+                          },
+                          {
+                            "value": "tradepro",
+                            "label": "Tradepro"
+                          },
+                          {
+                            "value": "greeETac",
+                            "label": "Gree E-Tac"
+                          },
+                          {
+                            "value": "founten",
+                            "label": "Founten"
+                          },
+                          {
+                            "value": "copeland",
+                            "label": "Copeland"
+                          },
+                          {
+                            "value": "grandaire",
+                            "label": "Grandaire"
+                          },
+                          {
+                            "value": "heil",
+                            "label": "Heil"
+                          }
+                        ],
+                        "json": "",
+                        "url": ""
+                      },
+                      "dataSrc": "values",
+                      "valueProperty": "",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.label }}</span>",
+                      "multiple": false,
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false
+                      },
+                      "type": "select"
+                    }
+                  ]
+                },
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "inputType": "text",
+                      "inputMask": "",
+                      "label": "Part #",
+                      "key": "part2",
+                      "placeholder": "",
+                      "prefix": "",
+                      "suffix": "",
+                      "multiple": false,
+                      "defaultValue": "",
+                      "protected": false,
+                      "unique": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": false,
+                        "minLength": "",
+                        "maxLength": "",
+                        "pattern": "",
+                        "custom": "",
+                        "customPrivate": false
+                      },
+                      "type": "textfield",
+                      "isNew": false
+                    }
+                  ]
+                }
+              ],
+              "type": "columns",
+              "isNew": true
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "newPart",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": []
+    },
+    "rmaForm": {
+      "title": "RMAForm",
+      "type": "form",
+      "name": "rmaForm",
+      "path": "rmaform",
+      "components": [
+        {
+          "type": "htmlelement",
+          "content": "Dealer Info:",
+          "className": "",
+          "attrs": [
+            {
+              "value": "",
+              "attr": ""
+            }
+          ],
+          "tag": "h4",
+          "input": false
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "columns": [
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Dealer",
+                      "key": "contractor.dealer",
+                      "placeholder": "",
+                      "resource": "dealer",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+                      "selectFields": "",
+                      "searchFields": [
+                        "data.name__regex"
+                      ],
+                      "multiple": false,
+                      "protected": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": true
+                      },
+                      "type": "resource",
+                      "lockKey": true,
+                      "source": "56a3bf05e0a91b010033c46a",
+                      "isNew": false
+                    }
+                  ]
+                },
+                {
+                  "components": [
+                    {
+                      "input": true,
+                      "tableView": true,
+                      "label": "Assigned Contractor",
+                      "key": "appointment.assignedContractor",
+                      "placeholder": "Contractor",
+                      "resource": "agent",
+                      "defaultValue": "",
+                      "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+                      "selectFields": "",
+                      "searchFields": [
+                        "data.name__regex"
+                      ],
+                      "multiple": false,
+                      "protected": false,
+                      "persistent": true,
+                      "validate": {
+                        "required": true
+                      },
+                      "type": "resource",
+                      "lockKey": true,
+                      "source": "56a3bf05e0a91b010033c46c",
+                      "isNew": false
+                    }
+                  ]
+                }
+              ],
+              "type": "columns",
+              "isNew": true
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "dealerInfo",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "tag": "h4",
+              "attrs": [
+                {
+                  "attr": "",
+                  "value": ""
+                }
+              ],
+              "className": "",
+              "content": "Customer Info:",
+              "type": "htmlelement"
+            },
+            {
+              "isNew": false,
+              "source": "56a3bf05e0a91b010033c46e",
+              "lockKey": true,
+              "type": "resource",
+              "validate": {
+                "required": true
+              },
+              "persistent": true,
+              "protected": false,
+              "multiple": false,
+              "searchFields": [
+                "data.lastName__regex"
+              ],
+              "selectFields": "",
+              "template": "<span>{{ item.data.lastName }}, {{ item.data.firstName }}</span>",
+              "defaultValue": "",
+              "resource": "customer",
+              "placeholder": "",
+              "key": "equipment.customer",
+              "label": "Customer",
+              "tableView": true,
+              "input": true
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "container",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": true,
+          "tree": true,
+          "components": [
+            {
+              "input": false,
+              "tag": "h4",
+              "attrs": [
+                {
+                  "attr": "",
+                  "value": ""
+                }
+              ],
+              "className": "",
+              "content": "Product Info:",
+              "type": "htmlelement",
+              "isNew": false
+            },
+            {
+              "input": true,
+              "tree": true,
+              "components": [
+                {
+                  "input": true,
+                  "tableView": true,
+                  "label": "Original Purchase Date",
+                  "key": "originalPurchaseDate",
+                  "placeholder": "",
+                  "format": "yyyy-MM-dd HH:mm",
+                  "enableDate": true,
+                  "enableTime": true,
+                  "minDate": null,
+                  "maxDate": null,
+                  "datepickerMode": "day",
+                  "datePicker": {
+                    "showWeeks": true,
+                    "startingDay": 0,
+                    "initDate": "",
+                    "minMode": "day",
+                    "maxMode": "year",
+                    "yearRange": "20"
+                  },
+                  "timePicker": {
+                    "hourStep": 1,
+                    "minuteStep": 1,
+                    "showMeridian": true,
+                    "readonlyInput": false,
+                    "mousewheel": true,
+                    "arrowkeys": true
+                  },
+                  "protected": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false,
+                    "custom": ""
+                  },
+                  "type": "datetime",
+                  "isNew": false
+                },
+                {
+                  "input": true,
+                  "tableView": true,
+                  "inputType": "text",
+                  "inputMask": "",
+                  "label": "Invoice #",
+                  "key": "invoice",
+                  "placeholder": "",
+                  "prefix": "",
+                  "suffix": "",
+                  "multiple": false,
+                  "defaultValue": "",
+                  "protected": false,
+                  "unique": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false,
+                    "minLength": "",
+                    "maxLength": "",
+                    "pattern": "",
+                    "custom": "",
+                    "customPrivate": false
+                  },
+                  "type": "textfield"
+                },
+                {
+                  "isNew": false,
+                  "source": "56a3bf05e0a91b010033c46e",
+                  "lockKey": true,
+                  "type": "textfield",
+                  "validate": {
+                    "customPrivate": false,
+                    "custom": "",
+                    "pattern": "",
+                    "maxLength": "",
+                    "minLength": "",
+                    "required": false
+                  },
+                  "persistent": true,
+                  "unique": false,
+                  "protected": false,
+                  "defaultValue": "",
+                  "multiple": false,
+                  "suffix": "",
+                  "prefix": "",
+                  "placeholder": "",
+                  "key": "equipment.serialNumber",
+                  "label": "Serial Number",
+                  "inputMask": "",
+                  "inputType": "text",
+                  "tableView": true,
+                  "input": true
+                },
+                {
+                  "isNew": false,
+                  "source": "56a3bf05e0a91b010033c46e",
+                  "lockKey": true,
+                  "type": "select",
+                  "validate": {
+                    "required": false
+                  },
+                  "persistent": true,
+                  "unique": false,
+                  "protected": false,
+                  "multiple": false,
+                  "template": "<span>{{ item.label }}</span>",
+                  "defaultValue": "",
+                  "valueProperty": "",
+                  "dataSrc": "values",
+                  "data": {
+                    "url": "",
+                    "json": "",
+                    "values": [
+                      {
+                        "value": "model1",
+                        "label": "Model 1"
+                      },
+                      {
+                        "value": "model 2",
+                        "label": "Model 2"
+                      },
+                      {
+                        "value": "model 3",
+                        "label": "Model 3"
+                      }
+                    ]
+                  },
+                  "placeholder": "",
+                  "key": "equipment.modelNumber",
+                  "label": "Model Number",
+                  "tableView": true,
+                  "input": true
+                }
+              ],
+              "tableView": true,
+              "label": "",
+              "key": "productInformation",
+              "protected": false,
+              "persistent": true,
+              "type": "container",
+              "customClass": "font-weight: bold"
+            },
+            {
+              "input": true,
+              "tree": true,
+              "components": [
+                {
+                  "input": true,
+                  "tableView": true,
+                  "inputType": "text",
+                  "inputMask": "",
+                  "label": "Reason for return",
+                  "key": "reasonforreturn",
+                  "placeholder": "",
+                  "prefix": "",
+                  "suffix": "",
+                  "multiple": false,
+                  "defaultValue": "",
+                  "protected": false,
+                  "unique": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false,
+                    "minLength": "",
+                    "maxLength": "",
+                    "pattern": "",
+                    "custom": "",
+                    "customPrivate": false
+                  },
+                  "type": "textfield"
+                },
+                {
+                  "input": true,
+                  "inputType": "checkbox",
+                  "tableView": true,
+                  "hideLabel": true,
+                  "label": "Please exchange for different item # ______________________________ I understand my credit card will be billed for the difference if the exchange item costs more than the returned item plus any new shipping charges that may apply. If the exchange item costs less than the returned item, then a credit will be issued to your credit card account.",
+                  "key": "pleaseexchangefordifferentitemIunderstandmycreditcardwillbebilledforthedifferenceiftheexchangeitemcostsmorethanthereturneditemplusanynewshippingchargesthatmayapplyIftheexchangeitemcostslessthanthereturneditemthenacreditwillbeissuedtoyourcreditcardaccount",
+                  "defaultValue": false,
+                  "protected": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false
+                  },
+                  "type": "checkbox",
+                  "isNew": false
+                },
+                {
+                  "input": true,
+                  "inputType": "checkbox",
+                  "tableView": true,
+                  "hideLabel": true,
+                  "label": "WARRANTY EXCHANGE-Unit defective under warranty!",
+                  "key": "warrantyexchangeUnitdefectiveunderwarranty",
+                  "defaultValue": false,
+                  "protected": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false
+                  },
+                  "type": "checkbox",
+                  "isNew": false
+                },
+                {
+                  "input": true,
+                  "inputType": "checkbox",
+                  "tableView": true,
+                  "hideLabel": true,
+                  "label": "Please refund credit to my credit card, less 15% Re-Stock Fee. Please allow 5 business days for evaluation and credit to occur.",
+                  "key": "pleaserefundcredittomycreditcardless15ReStockFeePleaseallow5Businessdaysforevaluationandcredittooccur",
+                  "defaultValue": false,
+                  "protected": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false
+                  },
+                  "type": "checkbox",
+                  "isNew": false
+                },
+                {
+                  "input": true,
+                  "inputType": "checkbox",
+                  "tableView": true,
+                  "hideLabel": true,
+                  "label": "Items were defective upon receipt of order due to shipping damage, etc",
+                  "key": "itemsweredefectiveuponreceiptoforderduetoshippingdamageetc",
+                  "defaultValue": false,
+                  "protected": false,
+                  "persistent": true,
+                  "validate": {
+                    "required": false
+                  },
+                  "type": "checkbox",
+                  "isNew": false
+                }
+              ],
+              "tableView": true,
+              "label": "",
+              "key": "returnInfo",
+              "protected": false,
+              "persistent": true,
+              "type": "container"
+            }
+          ],
+          "tableView": true,
+          "label": "",
+          "key": "customerInfo",
+          "protected": false,
+          "persistent": true,
+          "type": "container"
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": []
+    }
+  },
+  "actions": {
+    "role": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "dealer",
+      "settings": {
+        "role": "dealer",
+        "type": "add",
+        "association": "new"
+      },
+      "priority": 1,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "email": {
+      "title": "Email",
+      "name": "email",
+      "form": "dealer",
+      "settings": {
+        "message": "{{ table(form.components) }}",
+        "template": "",
+        "subject": "New submission for {{ form.title }}.",
+        "emails": [
+          "{{ data.email }}"
+        ],
+        "from": "no-reply@form.io",
+        "transport": "default"
+      },
+      "priority": 0,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "action2": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "agent",
+      "settings": {
+        "role": "agent",
+        "association": "new",
+        "type": "add"
+      },
+      "priority": 1,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "action13": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "admin",
+      "settings": {
+        "association": "new",
+        "type": "add",
+        "role": "administrator"
+      },
+      "priority": 1,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "after"
+      ]
+    },
+    "action14": {
+      "title": "Authentication",
+      "name": "auth",
+      "form": "adminLoginForm",
+      "settings": {
+        "username": "admin.email",
+        "password": "admin.password",
+        "association": "existing"
+      },
+      "priority": 0,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "before"
+      ]
+    },
+    "auth": {
+      "title": "Authentication",
+      "name": "auth",
+      "form": "contractorLoginForm",
+      "settings": {
+        "association": "existing",
+        "role": "",
+        "username": "contractor.email",
+        "password": "contractor.password"
+      },
+      "priority": 0,
+      "method": [
+        "create"
+      ],
+      "handler": [
+        "before"
+      ]
+    }
+  },
+  "resources": {
+    "dealer": {
+      "title": "Dealer",
+      "type": "resource",
+      "name": "dealer",
+      "path": "dealer",
+      "components": [
+        {
+          "type": "textfield",
+          "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required": true
+          },
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "multiple": false,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "name",
+          "label": "Name",
+          "inputMask": "",
+          "inputType": "text",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "validate": {
+            "required": true
+          },
+          "type": "email",
+          "persistent": true,
+          "unique": true,
+          "protected": false,
+          "defaultValue": "",
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "email",
+          "label": "Email",
+          "inputType": "email",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "validate": {
+            "required": true
+          },
+          "type": "password",
+          "persistent": true,
+          "protected": true,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "password",
+          "label": "Password",
+          "inputType": "password",
+          "tableView": false,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "customer": {
+      "title": "Customer",
+      "type": "resource",
+      "name": "customer",
+      "path": "customer",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Dealer",
+          "key": "dealer",
+          "placeholder": "",
+          "resource": "dealer",
+          "defaultValue": "",
+          "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.name__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "validate": {
+            "required": false
+          },
+          "unique": false,
+          "placeholder": "Enter the address for this customer",
+          "multiple": false,
+          "type": "address",
+          "tableView": true,
+          "protected": false,
+          "persistent": true,
+          "key": "address",
+          "label": "Address",
+          "input": true
+        },
+        {
+          "components": [
+            {
+              "validate": {
+                "maxLength": "",
+                "customPrivate": false,
+                "custom": "",
+                "required": false,
+                "pattern": "",
+                "minLength": ""
+              },
+              "type": "textfield",
+              "label": "First Name",
+              "key": "firstName",
+              "placeholder": "Primary contact first name",
+              "inputMask": "",
+              "suffix": "",
+              "defaultValue": "",
+              "input": true,
+              "tableView": true,
+              "prefix": "",
+              "persistent": true,
+              "multiple": false,
+              "protected": false,
+              "inputType": "text",
+              "unique": false
+            },
+            {
+              "prefix": "",
+              "defaultValue": "",
+              "tableView": true,
+              "multiple": false,
+              "inputType": "text",
+              "label": "Last Name",
+              "inputMask": "",
+              "suffix": "",
+              "validate": {
+                "minLength": "",
+                "maxLength": "",
+                "customPrivate": false,
+                "custom": "",
+                "required": false,
+                "pattern": ""
+              },
+              "input": true,
+              "placeholder": "Primary contact last name",
+              "unique": false,
+              "key": "lastName",
+              "persistent": true,
+              "type": "textfield",
+              "protected": false
+            },
+            {
+              "key": "phoneNumber",
+              "unique": false,
+              "suffix": "",
+              "prefix": "",
+              "validate": {
+                "maxLength": "",
+                "custom": "",
+                "required": false,
+                "pattern": "",
+                "minLength": ""
+              },
+              "input": true,
+              "defaultValue": "",
+              "persistent": true,
+              "inputMask": "(999)-999-9999",
+              "tableView": true,
+              "multiple": false,
+              "type": "textfield",
+              "protected": false,
+              "lockKey": true,
+              "inputType": "text",
+              "placeholder": "Enter the primary contact phone number",
+              "label": "Phone Number"
+            },
+            {
+              "prefix": "",
+              "persistent": true,
+              "label": "Email",
+              "key": "email",
+              "placeholder": "Enter the primary contact email",
+              "inputType": "email",
+              "tableView": true,
+              "input": true,
+              "defaultValue": "",
+              "unique": false,
+              "suffix": "",
+              "protected": false,
+              "type": "email"
+            }
+          ],
+          "type": "panel",
+          "title": "Primary Contact Information",
+          "theme": "default",
+          "input": false
+        },
+        {
+          "input": true,
+          "inputType": "checkbox",
+          "tableView": true,
+          "hideLabel": true,
+          "label": "Inactive",
+          "key": "inactive",
+          "defaultValue": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": false
+          },
+          "type": "checkbox"
+        },
+        {
+          "theme": "primary",
+          "size": "md",
+          "leftIcon": "",
+          "action": "submit",
+          "key": "submit",
+          "rightIcon": "",
+          "label": "Submit",
+          "type": "button",
+          "tableView": false,
+          "input": true,
+          "disableOnInvalid": true,
+          "block": false
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "55cd5c3ca51a96bef99ef54e",
+            "anonymous",
+            "agent",
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "agent",
+            "dealer",
+            "administrator"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "agent",
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "agent",
+            "dealer",
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": [
+            "administrator"
+          ]
+        }
+      ]
+    },
+    "agent": {
+      "title": "Contractor",
+      "type": "resource",
+      "name": "contractor",
+      "path": "contractor",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Dealer",
+          "key": "dealer",
+          "placeholder": "",
+          "resource": "dealer",
+          "defaultValue": "",
+          "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.name__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "defaultValue": "",
+          "validate": {
+            "minLength": "",
+            "pattern": "",
+            "required": true,
+            "custom": "",
+            "maxLength": ""
+          },
+          "input": true,
+          "prefix": "",
+          "persistent": true,
+          "tableView": true,
+          "suffix": "",
+          "unique": false,
+          "inputMask": "",
+          "label": "Name",
+          "inputType": "text",
+          "multiple": false,
+          "key": "name",
+          "protected": false,
+          "type": "textfield",
+          "placeholder": "Enter the contractor's name"
+        },
+        {
+          "inputType": "email",
+          "persistent": true,
+          "prefix": "",
+          "unique": true,
+          "defaultValue": "",
+          "label": "Email",
+          "protected": false,
+          "type": "email",
+          "key": "email",
+          "tableView": true,
+          "placeholder": "Enter the email address",
+          "validate": {
+            "required": true
+          },
+          "suffix": "",
+          "input": true
+        },
+        {
+          "tableView": true,
+          "type": "phoneNumber",
+          "input": true,
+          "key": "phoneNumber",
+          "unique": false,
+          "protected": false,
+          "validate": {
+            "required": false
+          },
+          "multiple": false,
+          "label": "Phone Number",
+          "placeholder": "Enter the contractor's phone number",
+          "persistent": true,
+          "suffix": "",
+          "prefix": "",
+          "inputMask": "(999) 999-9999"
+        },
+        {
+          "tableView": false,
+          "validate": {
+            "required": true
+          },
+          "key": "password",
+          "placeholder": "Enter your contractor password",
+          "inputType": "password",
+          "prefix": "",
+          "protected": true,
+          "label": "Password",
+          "persistent": true,
+          "suffix": "",
+          "type": "password",
+          "input": true
+        },
+        {
+          "label": "Submit",
+          "rightIcon": "",
+          "size": "md",
+          "disableOnInvalid": true,
+          "key": "submit",
+          "type": "button",
+          "tableView": false,
+          "action": "submit",
+          "block": false,
+          "input": true,
+          "leftIcon": "",
+          "theme": "primary"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "55cd5c3ca51a96bef99ef54e",
+            "anonymous",
+            "agent",
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "agent",
+            "dealer",
+            "administrator"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": [
+            "administrator"
+          ]
+        }
+      ]
+    },
+    "admin": {
+      "title": "Admin",
+      "type": "resource",
+      "name": "admin",
+      "path": "admin",
+      "components": [
+        {
+          "input": true,
+          "key": "firstName",
+          "suffix": "",
+          "type": "textfield",
+          "protected": false,
+          "persistent": true,
+          "defaultValue": "",
+          "unique": false,
+          "multiple": false,
+          "tableView": true,
+          "inputMask": "",
+          "prefix": "",
+          "label": "First Name",
+          "validate": {
+            "custom": "",
+            "required": false,
+            "pattern": "",
+            "minLength": "",
+            "maxLength": "",
+            "customPrivate": false
+          },
+          "placeholder": "Enter the administrators first name",
+          "inputType": "text"
+        },
+        {
+          "multiple": false,
+          "unique": false,
+          "defaultValue": "",
+          "persistent": true,
+          "tableView": true,
+          "inputType": "text",
+          "type": "textfield",
+          "protected": false,
+          "prefix": "",
+          "label": "Last Name",
+          "validate": {
+            "maxLength": "",
+            "customPrivate": false,
+            "custom": "",
+            "required": false,
+            "pattern": "",
+            "minLength": ""
+          },
+          "input": true,
+          "inputMask": "",
+          "placeholder": "Enter the administrators last name",
+          "key": "lastName",
+          "suffix": ""
+        },
+        {
+          "suffix": "",
+          "tableView": true,
+          "label": "Email",
+          "unique": true,
+          "placeholder": "Enter the email address",
+          "defaultValue": "",
+          "key": "email",
+          "type": "email",
+          "validate": {
+            "required": true
+          },
+          "inputType": "email",
+          "prefix": "",
+          "persistent": true,
+          "input": true,
+          "protected": false
+        },
+        {
+          "tableView": false,
+          "prefix": "",
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "password",
+          "key": "password",
+          "inputType": "password",
+          "suffix": "",
+          "protected": true,
+          "placeholder": "Enter the admin password",
+          "label": "Password",
+          "input": true
+        },
+        {
+          "tableView": false,
+          "input": true,
+          "block": false,
+          "action": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "label": "Submit",
+          "key": "submit",
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "anonymous",
+            "agent",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": []
+        },
+        {
+          "type": "delete_all",
+          "roles": []
+        },
+        {
+          "type": "create_own",
+          "roles": []
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "appointment": {
+      "title": "Appointment",
+      "type": "resource",
+      "name": "appointment",
+      "path": "appointment",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Customer",
+          "key": "customer",
+          "placeholder": "Customer",
+          "resource": "customer",
+          "defaultValue": "",
+          "template": "<span>{{ item.data.lastName }}, {{ item.data.firstName }}</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.lastName__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Assigned Contractor",
+          "key": "assignedContractor",
+          "placeholder": "Contractor",
+          "resource": "agent",
+          "defaultValue": "",
+          "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.name__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "type": "datetime",
+          "validate": {
+            "custom": "",
+            "required": false
+          },
+          "persistent": true,
+          "protected": false,
+          "timePicker": {
+            "arrowkeys": true,
+            "mousewheel": true,
+            "readonlyInput": false,
+            "showMeridian": true,
+            "minuteStep": 1,
+            "hourStep": 1
+          },
+          "datePicker": {
+            "yearRange": "20",
+            "maxMode": "year",
+            "minMode": "day",
+            "initDate": "",
+            "startingDay": 0,
+            "showWeeks": true
+          },
+          "datepickerMode": "day",
+          "maxDate": null,
+          "minDate": null,
+          "enableTime": true,
+          "enableDate": true,
+          "format": "yyyy-MM-dd HH:mm",
+          "placeholder": "",
+          "key": "appointmentTime",
+          "label": "Appointment Time",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "timeClock": {
+      "title": "Time Clock",
+      "type": "resource",
+      "name": "timeClock",
+      "path": "contractor/timeclock",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Appointment",
+          "key": "appointment",
+          "placeholder": "Appointment",
+          "resource": "appointment",
+          "defaultValue": "",
+          "template": "<span>[{{ item.data.appointmentTime | date : 'medium' }}]</span>\n<strong>{{ item.data.customer.data.lastName }}, {{ item.data.customer.data.firstName }}</strong> - \n<span>{{ item.data.customer.data.address.formatted_address }}</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.customer.data.lastName__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Time",
+          "key": "time",
+          "placeholder": "",
+          "format": "yyyy-MM-dd HH:mm",
+          "enableDate": true,
+          "enableTime": true,
+          "minDate": null,
+          "maxDate": null,
+          "datepickerMode": "day",
+          "datePicker": {
+            "showWeeks": true,
+            "startingDay": 0,
+            "initDate": "",
+            "minMode": "day",
+            "maxMode": "year",
+            "yearRange": "20"
+          },
+          "timePicker": {
+            "hourStep": 1,
+            "minuteStep": 1,
+            "showMeridian": true,
+            "readonlyInput": false,
+            "mousewheel": true,
+            "arrowkeys": true
+          },
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true,
+            "custom": ""
+          },
+          "type": "datetime"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Activity",
+          "key": "activity",
+          "placeholder": "",
+          "data": {
+            "values": [
+              {
+                "value": "startDate",
+                "label": "Start date"
+              },
+              {
+                "value": "onroute",
+                "label": "On Route to Customer"
+              },
+              {
+                "value": "jobstart",
+                "label": "Job Start"
+              },
+              {
+                "value": "jobend",
+                "label": "Job End"
+              },
+              {
+                "value": "lunchstart",
+                "label": "Lunch Start"
+              },
+              {
+                "value": "lunchend",
+                "label": "Lunch End"
+              },
+              {
+                "value": "endofday",
+                "label": "End of Day"
+              },
+              {
+                "value": "appointments",
+                "label": "Appointments"
+              }
+            ],
+            "json": "",
+            "url": ""
+          },
+          "dataSrc": "values",
+          "valueProperty": "",
+          "defaultValue": "",
+          "template": "<span>{{ item.label }}</span>",
+          "multiple": false,
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "select"
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "key": "gpsLatitude",
+          "label": "GPS Latitude",
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "type": "hidden"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "key": "gpsLongitude",
+          "label": "GPS Longitude",
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "type": "hidden"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator",
+            "dealer"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "update_own",
+          "roles": [
+            "agent"
+          ]
+        },
+        {
+          "type": "delete_own",
+          "roles": [
+            "agent"
+          ]
+        }
+      ]
+    },
+    "equipment": {
+      "title": "Equipment",
+      "type": "resource",
+      "name": "equipment",
+      "path": "customer/equipment",
+      "components": [
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Customer",
+          "key": "customer",
+          "placeholder": "",
+          "resource": "customer",
+          "defaultValue": "",
+          "template": "<span>{{ item.data.lastName }}, {{ item.data.firstName }}</span>",
+          "selectFields": "",
+          "searchFields": [
+            "data.lastName__regex"
+          ],
+          "multiple": false,
+          "protected": false,
+          "persistent": true,
+          "validate": {
+            "required": true
+          },
+          "type": "resource"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "inputType": "text",
+          "inputMask": "",
+          "label": "Serial Number",
+          "key": "serialNumber",
+          "placeholder": "",
+          "prefix": "",
+          "suffix": "",
+          "multiple": false,
+          "defaultValue": "",
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "validate": {
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "pattern": "",
+            "custom": "",
+            "customPrivate": false
+          },
+          "type": "textfield"
+        },
+        {
+          "input": true,
+          "tableView": true,
+          "label": "Model Number",
+          "key": "modelNumber",
+          "placeholder": "",
+          "data": {
+            "values": [
+              {
+                "value": "model1",
+                "label": "Model 1"
+              },
+              {
+                "value": "model 2",
+                "label": "Model 2"
+              },
+              {
+                "value": "model 3",
+                "label": "Model 3"
+              }
+            ],
+            "json": "",
+            "url": ""
+          },
+          "dataSrc": "values",
+          "valueProperty": "",
+          "defaultValue": "",
+          "template": "<span>{{ item.label }}</span>",
+          "multiple": false,
+          "protected": false,
+          "unique": false,
+          "persistent": true,
+          "validate": {
+            "required": false
+          },
+          "type": "select"
+        },
+        {
+          "input": true,
+          "label": "Submit",
+          "tableView": false,
+          "key": "submit",
+          "size": "md",
+          "leftIcon": "",
+          "rightIcon": "",
+          "block": false,
+          "action": "submit",
+          "disableOnInvalid": true,
+          "theme": "primary",
+          "type": "button"
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    },
+    "service": {
+      "title": "Service",
+      "type": "resource",
+      "name": "service",
+      "path": "appointment/service",
+      "components": [
+        {
+          "type": "resource",
+          "validate": {
+            "required": true
+          },
+          "persistent": true,
+          "protected": false,
+          "multiple": false,
+          "searchFields": "",
+          "selectFields": "",
+          "template": "<span>{{ item.data }}</span>",
+          "defaultValue": "",
+          "resource": "appointment",
+          "placeholder": "",
+          "key": "appointment",
+          "label": "Appointment",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "textfield",
+          "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required": false
+          },
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "multiple": false,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "servicePerformed",
+          "label": "Service Performed",
+          "inputMask": "",
+          "inputType": "text",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "textarea",
+          "validate": {
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required": false
+          },
+          "persistent": true,
+          "protected": false,
+          "defaultValue": "",
+          "multiple": false,
+          "rows": 3,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "serviceNotes",
+          "label": "Service Notes",
+          "tableView": true,
+          "input": true
+        },
+        {
+          "type": "button",
+          "theme": "primary",
+          "disableOnInvalid": true,
+          "action": "submit",
+          "block": false,
+          "rightIcon": "",
+          "leftIcon": "",
+          "size": "md",
+          "key": "submit",
+          "tableView": false,
+          "label": "Submit",
+          "input": true
+        }
+      ],
+      "access": [
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "agent",
+            "anonymous",
+            "dealer"
+          ]
+        }
+      ],
+      "submissionAccess": [
+        {
+          "type": "create_all",
+          "roles": []
+        },
+        {
+          "type": "read_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "update_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "delete_all",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "create_own",
+          "roles": [
+            "administrator",
+            "dealer",
+            "agent"
+          ]
+        },
+        {
+          "type": "read_own",
+          "roles": []
+        },
+        {
+          "type": "update_own",
+          "roles": []
+        },
+        {
+          "type": "delete_own",
+          "roles": []
+        }
+      ]
+    }
+  }
+}
