@@ -1,8 +1,12 @@
 {
   "title": "Service Tracker",
   "description": "A service scheduling and tracking app.",
-  "name": "wiqqarndvwmhcxt",
-  "plan": "basic",
+  "version": "0.0.0",
+  "name": "servicetracker",
+  "preview": {
+    "url": "http://formio.github.io/formio-app-servicetracker",
+    "repo": "https://github.com/formio/formio-app-servicetracker"
+  },
   "roles": {
     "administrator": {
       "title": "Administrator",
