@@ -1,0 +1,1529 @@
+{
+  "title": "Service Tracker",
+  "description": "A service scheduling and tracking app.",
+  "name": "wiqqarndvwmhcxt",
+  "plan": "basic",
+  "roles": {
+    "administrator": {
+      "title": "Administrator",
+      "description": "The Administrator Role.",
+      "admin": true,
+      "default": false
+    },
+    "agent": {
+      "title": "Contractor",
+      "description": "A Watsco Contractor",
+      "admin": false,
+      "default": false
+    },
+    "anonymous": {
+      "title": "Anonymous",
+      "description": "The Anonymous Role.",
+      "admin": false,
+      "default": true
+    },
+    "dealer": {
+      "title": "Dealer",
+      "description": "Role for Watsco Dealers",
+      "admin": false,
+      "default": false
+    }
+  },
+  "forms": {
+    "adminLoginForm": {
+      "title": "Admin Login Form",
+      "type": "form",
+      "name": "adminLoginForm",
+      "path": "admin/login",
+      "components": [{
+        "inputType": "email",
+        "label": "Admin Email",
+        "protected": false,
+        "tableView": true,
+        "key": "admin.email",
+        "placeholder": "Enter your email address",
+        "input": true,
+        "lockKey": true,
+        "unique": true,
+        "defaultValue": "",
+        "persistent": true,
+        "type": "email",
+        "validate": {
+          "required": true
+        },
+        "prefix": "",
+        "suffix": ""
+      }, {
+        "inputType": "password",
+        "suffix": "",
+        "tableView": false,
+        "type": "password",
+        "label": "Admin Password",
+        "key": "admin.password",
+        "placeholder": "Enter your password",
+        "prefix": "",
+        "lockKey": true,
+        "persistent": true,
+        "protected": true,
+        "validate": {
+          "required": true
+        },
+        "input": true
+      }, {
+        "label": "Submit",
+        "rightIcon": "",
+        "block": false,
+        "size": "md",
+        "input": true,
+        "disableOnInvalid": true,
+        "leftIcon": "",
+        "tableView": false,
+        "type": "button",
+        "action": "submit",
+        "key": "submit",
+        "theme": "primary"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "anonymous", "agent", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": []
+      }, {
+        "type": "update_all",
+        "roles": []
+      }, {
+        "type": "delete_all",
+        "roles": []
+      }, {
+        "type": "create_own",
+        "roles": ["anonymous"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "dealerLoginForm": {
+      "title": "Dealer Login Form",
+      "type": "form",
+      "name": "dealerLoginForm",
+      "path": "dealer/login",
+      "components": [{
+        "isNew": false,
+        "source": "56954496823ab301001b14a1",
+        "lockKey": true,
+        "validate": {
+          "required": true
+        },
+        "type": "email",
+        "persistent": true,
+        "unique": true,
+        "protected": false,
+        "defaultValue": "",
+        "suffix": "",
+        "prefix": "",
+        "placeholder": "",
+        "key": "dealer.email",
+        "label": "Dealer Email",
+        "inputType": "email",
+        "tableView": true,
+        "input": true
+      }, {
+        "isNew": false,
+        "source": "56954496823ab301001b14a1",
+        "lockKey": true,
+        "validate": {
+          "required": true
+        },
+        "type": "password",
+        "persistent": true,
+        "protected": true,
+        "suffix": "",
+        "prefix": "",
+        "placeholder": "",
+        "key": "dealer.password",
+        "label": "Dealer Password",
+        "inputType": "password",
+        "tableView": false,
+        "input": true
+      }, {
+        "type": "button",
+        "theme": "primary",
+        "disableOnInvalid": true,
+        "action": "submit",
+        "block": false,
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "key": "submit",
+        "tableView": false,
+        "label": "Submit",
+        "input": true
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": []
+      }, {
+        "type": "update_all",
+        "roles": []
+      }, {
+        "type": "delete_all",
+        "roles": []
+      }, {
+        "type": "create_own",
+        "roles": ["anonymous"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "customerForm1": {
+      "title": "Customer Form 1",
+      "type": "form",
+      "name": "customerForm1",
+      "path": "customerform1",
+      "components": [{
+        "input": true,
+        "tableView": true,
+        "label": "Customer",
+        "key": "customer",
+        "placeholder": "",
+        "resource": "customer",
+        "defaultValue": "",
+        "template": "<span>{{ item.data }}</span>",
+        "selectFields": "",
+        "searchFields": "",
+        "multiple": false,
+        "protected": false,
+        "persistent": true,
+        "validate": {
+          "required": true
+        },
+        "type": "resource"
+      }, {
+        "input": true,
+        "tableView": true,
+        "inputType": "radio",
+        "label": "How satisfied are you with the service you received",
+        "key": "howsatisfiedareyouwiththeserviceyoureceived",
+        "values": [{
+          "value": "1",
+          "label": "Unsatisfied"
+        }, {
+          "value": "2",
+          "label": "Somewhat unsatisfied"
+        }, {
+          "value": "3",
+          "label": "Neutral"
+        }, {
+          "value": "4",
+          "label": "Somewhat satisfied"
+        }, {
+          "value": "5",
+          "label": "Satisfied"
+        }],
+        "defaultValue": "",
+        "protected": false,
+        "persistent": true,
+        "validate": {
+          "required": true,
+          "custom": "",
+          "customPrivate": false
+        },
+        "type": "radio"
+      }, {
+        "input": true,
+        "label": "Submit",
+        "tableView": false,
+        "key": "submit",
+        "size": "md",
+        "leftIcon": "",
+        "rightIcon": "",
+        "block": false,
+        "action": "submit",
+        "disableOnInvalid": true,
+        "theme": "primary",
+        "type": "button"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": []
+    },
+    "contractorLoginForm": {
+      "title": "Contractor Login Form",
+      "type": "form",
+      "name": "contractorLoginForm",
+      "path": "contractor/login",
+      "components": [{
+        "isNew": false,
+        "source": "56954496823ab301001b149c",
+        "lockKey": true,
+        "validate": {
+          "required": true
+        },
+        "type": "email",
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "defaultValue": "",
+        "suffix": "",
+        "prefix": "",
+        "placeholder": "Enter the email address",
+        "key": "contractor.email",
+        "label": "Contractor Email",
+        "inputType": "email",
+        "tableView": true,
+        "input": true
+      }, {
+        "isNew": false,
+        "source": "56954496823ab301001b149c",
+        "lockKey": true,
+        "validate": {
+          "required": true
+        },
+        "type": "password",
+        "persistent": true,
+        "protected": true,
+        "suffix": "",
+        "prefix": "",
+        "placeholder": "Enter your contractor password",
+        "key": "contractor.password",
+        "label": "Contractor Password",
+        "inputType": "password",
+        "tableView": false,
+        "input": true
+      }, {
+        "type": "button",
+        "theme": "primary",
+        "disableOnInvalid": true,
+        "action": "submit",
+        "block": false,
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "key": "submit",
+        "tableView": false,
+        "label": "Submit",
+        "input": true
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": []
+      }, {
+        "type": "update_all",
+        "roles": []
+      }, {
+        "type": "delete_all",
+        "roles": []
+      }, {
+        "type": "create_own",
+        "roles": ["anonymous"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    }
+  },
+  "actions": {
+    "action2": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "agent",
+      "settings": {
+        "type": "add",
+        "association": "new",
+        "role": "agent"
+      },
+      "priority": 1,
+      "method": ["create"],
+      "handler": ["after"]
+    },
+    "action13": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "admin",
+      "settings": {
+        "role": "administrator",
+        "type": "add",
+        "association": "new"
+      },
+      "priority": 1,
+      "method": ["create"],
+      "handler": ["after"]
+    },
+    "role": {
+      "title": "Role Assignment",
+      "name": "role",
+      "form": "dealer",
+      "settings": {
+        "association": "new",
+        "type": "add",
+        "role": "dealer"
+      },
+      "priority": 1,
+      "method": ["create"],
+      "handler": ["after"]
+    },
+    "action14": {
+      "title": "Authentication",
+      "name": "auth",
+      "form": "adminLoginForm",
+      "settings": {
+        "association": "existing",
+        "password": "admin.password",
+        "username": "admin.email"
+      },
+      "priority": 0,
+      "method": ["create"],
+      "handler": ["before"]
+    },
+    "auth": {
+      "title": "Authentication",
+      "name": "auth",
+      "form": "contractorLoginForm",
+      "settings": {
+        "password": "contractor.password",
+        "username": "contractor.email",
+        "role": "",
+        "association": "existing"
+      },
+      "priority": 0,
+      "method": ["create"],
+      "handler": ["before"]
+    }
+  },
+  "resources": {
+    "dealer": {
+      "title": "Dealer",
+      "type": "resource",
+      "name": "dealer",
+      "path": "dealer",
+      "components": [{
+        "input": true,
+        "tableView": true,
+        "inputType": "text",
+        "inputMask": "",
+        "label": "Name",
+        "key": "name",
+        "placeholder": "",
+        "prefix": "",
+        "suffix": "",
+        "multiple": false,
+        "defaultValue": "",
+        "protected": false,
+        "unique": false,
+        "persistent": true,
+        "validate": {
+          "required": true,
+          "minLength": "",
+          "maxLength": "",
+          "pattern": "",
+          "custom": "",
+          "customPrivate": false
+        },
+        "type": "textfield"
+      }, {
+        "input": true,
+        "tableView": true,
+        "inputType": "email",
+        "label": "Email",
+        "key": "email",
+        "placeholder": "",
+        "prefix": "",
+        "suffix": "",
+        "defaultValue": "",
+        "protected": false,
+        "unique": true,
+        "persistent": true,
+        "type": "email",
+        "validate": {
+          "required": true
+        }
+      }, {
+        "input": true,
+        "tableView": false,
+        "inputType": "password",
+        "label": "Password",
+        "key": "password",
+        "placeholder": "",
+        "prefix": "",
+        "suffix": "",
+        "protected": true,
+        "persistent": true,
+        "type": "password",
+        "validate": {
+          "required": true
+        }
+      }, {
+        "input": true,
+        "label": "Submit",
+        "tableView": false,
+        "key": "submit",
+        "size": "md",
+        "leftIcon": "",
+        "rightIcon": "",
+        "block": false,
+        "action": "submit",
+        "disableOnInvalid": true,
+        "theme": "primary",
+        "type": "button"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "create_own",
+        "roles": ["administrator"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "customer": {
+      "title": "Customer",
+      "type": "resource",
+      "name": "customer",
+      "path": "customer",
+      "components": [{
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.name__regex"],
+        "selectFields": "",
+        "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+        "defaultValue": "",
+        "resource": "dealer",
+        "placeholder": "",
+        "key": "dealer",
+        "label": "Dealer",
+        "tableView": true,
+        "input": true
+      }, {
+        "input": true,
+        "label": "Address",
+        "key": "address",
+        "persistent": true,
+        "protected": false,
+        "tableView": true,
+        "type": "address",
+        "multiple": false,
+        "placeholder": "Enter the address for this customer",
+        "unique": false,
+        "validate": {
+          "required": false
+        }
+      }, {
+        "input": false,
+        "theme": "default",
+        "title": "Primary Contact Information",
+        "type": "panel",
+        "components": [{
+          "unique": false,
+          "inputType": "text",
+          "protected": false,
+          "multiple": false,
+          "persistent": true,
+          "prefix": "",
+          "tableView": true,
+          "input": true,
+          "defaultValue": "",
+          "suffix": "",
+          "inputMask": "",
+          "placeholder": "Primary contact first name",
+          "key": "firstName",
+          "label": "First Name",
+          "type": "textfield",
+          "validate": {
+            "minLength": "",
+            "pattern": "",
+            "required": false,
+            "custom": "",
+            "customPrivate": false,
+            "maxLength": ""
+          }
+        }, {
+          "protected": false,
+          "type": "textfield",
+          "persistent": true,
+          "key": "lastName",
+          "unique": false,
+          "placeholder": "Primary contact last name",
+          "input": true,
+          "validate": {
+            "pattern": "",
+            "required": false,
+            "custom": "",
+            "customPrivate": false,
+            "maxLength": "",
+            "minLength": ""
+          },
+          "suffix": "",
+          "inputMask": "",
+          "label": "Last Name",
+          "inputType": "text",
+          "multiple": false,
+          "tableView": true,
+          "defaultValue": "",
+          "prefix": ""
+        }, {
+          "label": "Phone Number",
+          "placeholder": "Enter the primary contact phone number",
+          "inputType": "text",
+          "lockKey": true,
+          "protected": false,
+          "type": "textfield",
+          "multiple": false,
+          "tableView": true,
+          "inputMask": "(999)-999-9999",
+          "persistent": true,
+          "defaultValue": "",
+          "input": true,
+          "validate": {
+            "minLength": "",
+            "pattern": "",
+            "required": false,
+            "custom": "",
+            "maxLength": ""
+          },
+          "prefix": "",
+          "suffix": "",
+          "unique": false,
+          "key": "phoneNumber"
+        }, {
+          "type": "email",
+          "protected": false,
+          "suffix": "",
+          "unique": false,
+          "defaultValue": "",
+          "input": true,
+          "tableView": true,
+          "inputType": "email",
+          "placeholder": "Enter the primary contact email",
+          "key": "email",
+          "label": "Email",
+          "persistent": true,
+          "prefix": ""
+        }]
+      }, {
+        "type": "checkbox",
+        "validate": {
+          "required": false
+        },
+        "persistent": true,
+        "protected": false,
+        "defaultValue": false,
+        "key": "inactive",
+        "label": "Inactive",
+        "hideLabel": true,
+        "tableView": true,
+        "inputType": "checkbox",
+        "input": true
+      }, {
+        "block": false,
+        "disableOnInvalid": true,
+        "input": true,
+        "tableView": false,
+        "type": "button",
+        "label": "Submit",
+        "rightIcon": "",
+        "key": "submit",
+        "action": "submit",
+        "leftIcon": "",
+        "size": "md",
+        "theme": "primary"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "55cd5c3ca51a96bef99ef54e", "anonymous", "agent", "dealer"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "agent", "dealer"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "agent", "dealer"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "create_own",
+        "roles": ["agent", "dealer", "administrator"]
+      }, {
+        "type": "read_own",
+        "roles": ["agent", "administrator", "dealer"]
+      }, {
+        "type": "update_own",
+        "roles": ["agent", "dealer", "administrator"]
+      }, {
+        "type": "delete_own",
+        "roles": ["administrator"]
+      }]
+    },
+    "agent": {
+      "title": "Contractor",
+      "type": "resource",
+      "name": "contractor",
+      "path": "contractor",
+      "components": [{
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.name__regex"],
+        "selectFields": "",
+        "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+        "defaultValue": "",
+        "resource": "dealer",
+        "placeholder": "",
+        "key": "dealer",
+        "label": "Dealer",
+        "tableView": true,
+        "input": true
+      }, {
+        "placeholder": "Enter the contractor's name",
+        "type": "textfield",
+        "protected": false,
+        "key": "name",
+        "multiple": false,
+        "inputType": "text",
+        "label": "Name",
+        "inputMask": "",
+        "unique": false,
+        "suffix": "",
+        "tableView": true,
+        "persistent": true,
+        "prefix": "",
+        "input": true,
+        "validate": {
+          "maxLength": "",
+          "custom": "",
+          "required": true,
+          "pattern": "",
+          "minLength": ""
+        },
+        "defaultValue": ""
+      }, {
+        "input": true,
+        "suffix": "",
+        "validate": {
+          "required": true
+        },
+        "placeholder": "Enter the email address",
+        "tableView": true,
+        "key": "email",
+        "type": "email",
+        "protected": false,
+        "label": "Email",
+        "defaultValue": "",
+        "unique": true,
+        "prefix": "",
+        "persistent": true,
+        "inputType": "email"
+      }, {
+        "inputMask": "(999) 999-9999",
+        "prefix": "",
+        "suffix": "",
+        "persistent": true,
+        "placeholder": "Enter the contractor's phone number",
+        "label": "Phone Number",
+        "multiple": false,
+        "validate": {
+          "required": false
+        },
+        "protected": false,
+        "unique": false,
+        "key": "phoneNumber",
+        "input": true,
+        "type": "phoneNumber",
+        "tableView": true
+      }, {
+        "input": true,
+        "type": "password",
+        "suffix": "",
+        "persistent": true,
+        "label": "Password",
+        "protected": true,
+        "prefix": "",
+        "inputType": "password",
+        "placeholder": "Enter your contractor password",
+        "key": "password",
+        "validate": {
+          "required": true
+        },
+        "tableView": false
+      }, {
+        "theme": "primary",
+        "leftIcon": "",
+        "input": true,
+        "block": false,
+        "action": "submit",
+        "tableView": false,
+        "type": "button",
+        "key": "submit",
+        "disableOnInvalid": true,
+        "size": "md",
+        "rightIcon": "",
+        "label": "Submit"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "55cd5c3ca51a96bef99ef54e", "anonymous", "agent", "dealer"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "create_own",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "read_own",
+        "roles": ["agent", "dealer", "administrator"]
+      }, {
+        "type": "update_own",
+        "roles": ["administrator"]
+      }, {
+        "type": "delete_own",
+        "roles": ["administrator"]
+      }]
+    },
+    "admin": {
+      "title": "Admin",
+      "type": "resource",
+      "name": "admin",
+      "path": "admin",
+      "components": [{
+        "inputType": "text",
+        "placeholder": "Enter the administrators first name",
+        "validate": {
+          "customPrivate": false,
+          "maxLength": "",
+          "minLength": "",
+          "pattern": "",
+          "required": false,
+          "custom": ""
+        },
+        "label": "First Name",
+        "prefix": "",
+        "inputMask": "",
+        "tableView": true,
+        "multiple": false,
+        "unique": false,
+        "defaultValue": "",
+        "persistent": true,
+        "protected": false,
+        "type": "textfield",
+        "suffix": "",
+        "key": "firstName",
+        "input": true
+      }, {
+        "suffix": "",
+        "key": "lastName",
+        "placeholder": "Enter the administrators last name",
+        "inputMask": "",
+        "input": true,
+        "validate": {
+          "minLength": "",
+          "pattern": "",
+          "required": false,
+          "custom": "",
+          "customPrivate": false,
+          "maxLength": ""
+        },
+        "label": "Last Name",
+        "prefix": "",
+        "protected": false,
+        "type": "textfield",
+        "inputType": "text",
+        "tableView": true,
+        "persistent": true,
+        "defaultValue": "",
+        "unique": false,
+        "multiple": false
+      }, {
+        "protected": false,
+        "input": true,
+        "persistent": true,
+        "prefix": "",
+        "inputType": "email",
+        "validate": {
+          "required": true
+        },
+        "type": "email",
+        "key": "email",
+        "defaultValue": "",
+        "placeholder": "Enter the email address",
+        "unique": true,
+        "label": "Email",
+        "tableView": true,
+        "suffix": ""
+      }, {
+        "input": true,
+        "label": "Password",
+        "placeholder": "Enter the admin password",
+        "protected": true,
+        "suffix": "",
+        "inputType": "password",
+        "key": "password",
+        "type": "password",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "prefix": "",
+        "tableView": false
+      }, {
+        "disableOnInvalid": true,
+        "theme": "primary",
+        "type": "button",
+        "key": "submit",
+        "label": "Submit",
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "action": "submit",
+        "block": false,
+        "input": true,
+        "tableView": false
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "anonymous", "agent", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "update_all",
+        "roles": []
+      }, {
+        "type": "delete_all",
+        "roles": []
+      }, {
+        "type": "create_own",
+        "roles": []
+      }, {
+        "type": "read_own",
+        "roles": ["administrator"]
+      }, {
+        "type": "update_own",
+        "roles": ["administrator"]
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "appointment": {
+      "title": "Appointment",
+      "type": "resource",
+      "name": "appointment",
+      "path": "appointment",
+      "components": [{
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.lastName__regex"],
+        "selectFields": "",
+        "template": "<span>{{ item.data.lastName }}, {{ item.data.firstName }}</span>",
+        "defaultValue": "",
+        "resource": "customer",
+        "placeholder": "Customer",
+        "key": "customer",
+        "label": "Customer",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.name__regex"],
+        "selectFields": "",
+        "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
+        "defaultValue": "",
+        "resource": "agent",
+        "placeholder": "Contractor",
+        "key": "assignedContractor",
+        "label": "Assigned Contractor",
+        "tableView": true,
+        "input": true
+      }, {
+        "input": true,
+        "tableView": true,
+        "label": "Appointment Time",
+        "key": "appointmentTime",
+        "placeholder": "",
+        "format": "yyyy-MM-dd HH:mm",
+        "enableDate": true,
+        "enableTime": true,
+        "minDate": null,
+        "maxDate": null,
+        "datepickerMode": "day",
+        "datePicker": {
+          "showWeeks": true,
+          "startingDay": 0,
+          "initDate": "",
+          "minMode": "day",
+          "maxMode": "year",
+          "yearRange": "20"
+        },
+        "timePicker": {
+          "hourStep": 1,
+          "minuteStep": 1,
+          "showMeridian": true,
+          "readonlyInput": false,
+          "mousewheel": true,
+          "arrowkeys": true
+        },
+        "protected": false,
+        "persistent": true,
+        "validate": {
+          "required": false,
+          "custom": ""
+        },
+        "type": "datetime"
+      }, {
+        "input": true,
+        "label": "Submit",
+        "tableView": false,
+        "key": "submit",
+        "size": "md",
+        "leftIcon": "",
+        "rightIcon": "",
+        "block": false,
+        "action": "submit",
+        "disableOnInvalid": true,
+        "theme": "primary",
+        "type": "button"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator"]
+      }, {
+        "type": "create_own",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "timeClock": {
+      "title": "Time Clock",
+      "type": "resource",
+      "name": "timeClock",
+      "path": "contractor/timeclock",
+      "components": [{
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.customer.data.lastName__regex"],
+        "selectFields": "",
+        "template": "<span>[{{ item.data.appointmentTime | date : 'medium' }}]</span>\n<strong>{{ item.data.customer.data.lastName }}, {{ item.data.customer.data.firstName }}</strong> - \n<span>{{ item.data.customer.data.address.formatted_address }}</span>",
+        "defaultValue": "",
+        "resource": "appointment",
+        "placeholder": "Appointment",
+        "key": "appointment",
+        "label": "Appointment",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "datetime",
+        "validate": {
+          "custom": "",
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "timePicker": {
+          "arrowkeys": true,
+          "mousewheel": true,
+          "readonlyInput": false,
+          "showMeridian": true,
+          "minuteStep": 1,
+          "hourStep": 1
+        },
+        "datePicker": {
+          "yearRange": "20",
+          "maxMode": "year",
+          "minMode": "day",
+          "initDate": "",
+          "startingDay": 0,
+          "showWeeks": true
+        },
+        "datepickerMode": "day",
+        "maxDate": null,
+        "minDate": null,
+        "enableTime": true,
+        "enableDate": true,
+        "format": "yyyy-MM-dd HH:mm",
+        "placeholder": "",
+        "key": "time",
+        "label": "Time",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "select",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "multiple": false,
+        "template": "<span>{{ item.label }}</span>",
+        "defaultValue": "",
+        "valueProperty": "",
+        "dataSrc": "values",
+        "data": {
+          "url": "",
+          "json": "",
+          "values": [{
+            "label": "Start date",
+            "value": "startDate"
+          }, {
+            "label": "On Route to Customer",
+            "value": "onroute"
+          }, {
+            "label": "Job Start",
+            "value": "jobstart"
+          }, {
+            "label": "Job End",
+            "value": "jobend"
+          }, {
+            "label": "Lunch Start",
+            "value": "lunchstart"
+          }, {
+            "label": "Lunch End",
+            "value": "lunchend"
+          }, {
+            "label": "End of Day",
+            "value": "endofday"
+          }, {
+            "label": "Appointments",
+            "value": "appointments"
+          }]
+        },
+        "placeholder": "",
+        "key": "activity",
+        "label": "Activity",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "button",
+        "theme": "primary",
+        "disableOnInvalid": true,
+        "action": "submit",
+        "block": false,
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "key": "submit",
+        "tableView": false,
+        "label": "Submit",
+        "input": true
+      }, {
+        "type": "hidden",
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "label": "GPS Latitude",
+        "key": "gpsLatitude",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "hidden",
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "label": "GPS Longitude",
+        "key": "gpsLongitude",
+        "tableView": true,
+        "input": true
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator", "dealer"]
+      }, {
+        "type": "create_own",
+        "roles": ["agent"]
+      }, {
+        "type": "read_own",
+        "roles": ["agent"]
+      }, {
+        "type": "update_own",
+        "roles": ["agent"]
+      }, {
+        "type": "delete_own",
+        "roles": ["agent"]
+      }]
+    },
+    "equipment": {
+      "title": "Equipment",
+      "type": "resource",
+      "name": "equipment",
+      "path": "customer/equipment",
+      "components": [{
+        "type": "resource",
+        "validate": {
+          "required": true
+        },
+        "persistent": true,
+        "protected": false,
+        "multiple": false,
+        "searchFields": ["data.lastName__regex"],
+        "selectFields": "",
+        "template": "<span>{{ item.data.lastName }}, {{ item.data.firstName }}</span>",
+        "defaultValue": "",
+        "resource": "customer",
+        "placeholder": "",
+        "key": "customer",
+        "label": "Customer",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "textfield",
+        "validate": {
+          "customPrivate": false,
+          "custom": "",
+          "pattern": "",
+          "maxLength": "",
+          "minLength": "",
+          "required": false
+        },
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "defaultValue": "",
+        "multiple": false,
+        "suffix": "",
+        "prefix": "",
+        "placeholder": "",
+        "key": "serialNumber",
+        "label": "Serial Number",
+        "inputMask": "",
+        "inputType": "text",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "select",
+        "validate": {
+          "required": false
+        },
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "multiple": false,
+        "template": "<span>{{ item.label }}</span>",
+        "defaultValue": "",
+        "valueProperty": "",
+        "dataSrc": "values",
+        "data": {
+          "url": "",
+          "json": "",
+          "values": [{
+            "label": "Model 1",
+            "value": "model1"
+          }, {
+            "label": "Model 2",
+            "value": "model 2"
+          }, {
+            "label": "Model 3",
+            "value": "model 3"
+          }]
+        },
+        "placeholder": "",
+        "key": "modelNumber",
+        "label": "Model Number",
+        "tableView": true,
+        "input": true
+      }, {
+        "type": "button",
+        "theme": "primary",
+        "disableOnInvalid": true,
+        "action": "submit",
+        "block": false,
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "key": "submit",
+        "tableView": false,
+        "label": "Submit",
+        "input": true
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "create_own",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    },
+    "service": {
+      "title": "Service",
+      "type": "resource",
+      "name": "service",
+      "path": "appointment/service",
+      "components": [{
+        "input": true,
+        "tableView": true,
+        "label": "Appointment",
+        "key": "appointment",
+        "placeholder": "",
+        "resource": "appointment",
+        "defaultValue": "",
+        "template": "<span>{{ item.data }}</span>",
+        "selectFields": "",
+        "searchFields": "",
+        "multiple": false,
+        "protected": false,
+        "persistent": true,
+        "validate": {
+          "required": true
+        },
+        "type": "resource"
+      }, {
+        "input": true,
+        "tableView": true,
+        "inputType": "text",
+        "inputMask": "",
+        "label": "Service Performed",
+        "key": "servicePerformed",
+        "placeholder": "",
+        "prefix": "",
+        "suffix": "",
+        "multiple": false,
+        "defaultValue": "",
+        "protected": false,
+        "unique": false,
+        "persistent": true,
+        "validate": {
+          "required": false,
+          "minLength": "",
+          "maxLength": "",
+          "pattern": "",
+          "custom": "",
+          "customPrivate": false
+        },
+        "type": "textfield"
+      }, {
+        "input": true,
+        "tableView": true,
+        "label": "Service Notes",
+        "key": "serviceNotes",
+        "placeholder": "",
+        "prefix": "",
+        "suffix": "",
+        "rows": 3,
+        "multiple": false,
+        "defaultValue": "",
+        "protected": false,
+        "persistent": true,
+        "validate": {
+          "required": false,
+          "minLength": "",
+          "maxLength": "",
+          "pattern": "",
+          "custom": ""
+        },
+        "type": "textarea"
+      }, {
+        "input": true,
+        "label": "Submit",
+        "tableView": false,
+        "key": "submit",
+        "size": "md",
+        "leftIcon": "",
+        "rightIcon": "",
+        "block": false,
+        "action": "submit",
+        "disableOnInvalid": true,
+        "theme": "primary",
+        "type": "button"
+      }],
+      "access": [{
+        "type": "read_all",
+        "roles": ["administrator", "agent", "anonymous", "dealer"]
+      }],
+      "submissionAccess": [{
+        "type": "create_all",
+        "roles": []
+      }, {
+        "type": "read_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "update_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "delete_all",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "create_own",
+        "roles": ["administrator", "dealer", "agent"]
+      }, {
+        "type": "read_own",
+        "roles": []
+      }, {
+        "type": "update_own",
+        "roles": []
+      }, {
+        "type": "delete_own",
+        "roles": []
+      }]
+    }
+  }
+}

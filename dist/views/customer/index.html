@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-building"></i> Customers
+        </h3>
+      </div>
+      <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <h5>Search By:</h5>
+          <form class="form">
+            <div class="form-group">
+              <label class="control-label" for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Last Name" ng-model="filter.lastName">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="lastName">Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number" ng-model="filter.phoneNumber">
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label for="">
+                  <input type="checkbox" ng-model="showInactive"> Show Inactive Customers
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-default" ui-sref="customerIndex({filter: filter, showInactive: showInactive})" ui-sref-opts="{reload:true}">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+        <div ng-if="customers.length == 0" class="alert alert-info" role="alert">
+          Could not find any customers. Click <strong>New Customer</strong> to add one.
+        </div>
+        <div ng-if="customers.length > 0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-repeat="customer in customers" class="clickable-table-row" ng-click="$state.go('customer.view', {customerId: customer._id})">
+                  <td>{{ customer.data.lastName }}, {{ customer.data.firstName }}</td>
+                  <td>{{ customer.data.address.formatted_address }}</td>
+                  <td>{{ customer.data.phoneNumber }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <bgf-pagination collection="customers" url="customersUrl" url-params="urlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+      </div>
+      <div class="panel-footer">
+        <a ui-sref="customerCreate()" class="btn btn-primary">
+          <i class="glyphicon glyphicon-plus"></i> New Customer
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

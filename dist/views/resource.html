@@ -1,0 +1,7 @@
+<h2>{{ currentResource.name | capitalize }}</h2>
+<ul class="nav nav-tabs">
+  <li ng-if="!hideView" role="presentation" ng-class="{active:isActive(currentResource.name + '.view')}"><a ui-sref="{{ currentResource.name }}.view()">View</a></li>
+  <li ng-if="!hideEdit" role="presentation" ng-class="{active:isActive(currentResource.name + '.edit')}"><a ui-sref="{{ currentResource.name }}.edit()">Edit</a></li>
+  <li ng-if="!hideDelete" role="presentation" ng-class="{active:isActive(currentResource.name + '.delete')}"><a ui-sref="{{ currentResource.name }}.delete()">Delete</a></li>
+</ul>
+<div ui-view></div>

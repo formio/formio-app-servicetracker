@@ -1,0 +1,22 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Equipment</h3>
+  </div>
+  <div class="panel-body">
+    <p><strong>Serial #: </strong> {{ currentResource.resource.data.serialNumber }}</p>
+    <p><strong>Model #: </strong> {{ currentResource.resource.data.modelNumber }}</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Customer Information</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.customer.data.firstName }} {{ currentResource.resource.data.customer.data.lastName }}</li>
+          <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.customer.data.phoneNumber }}</li>
+          <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.customer.data.email }}</li>
+        </ul>
+        <p><strong><a ui-sref="customer.view({customerId: currentResource.resource.data.customer._id})">View Customer Details</a></strong></p>
+      </div>
+    </div>
+  </div>
+</div>

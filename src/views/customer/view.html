@@ -1,0 +1,114 @@
+<h2>{{ currentResource.resource.data.name }}</h2>
+<p><strong>Address: </strong> {{ currentResource.resource.data.address.formatted_address }}</p>
+<p><strong>Status: </strong> {{ currentResource.resource.data.inactive ? 'Inactive' : 'Active' }}</p>
+<map ng-if="position" zoom="8" center="[{{ position.lat }}, {{ position.lng }}]"> <marker position="[{{ position.lat }}, {{ position.lng }}]" title="{{ currentResource.resource.data.address.formatted_address }}" visible></marker></map>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Primary Contact Information</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.firstName }} {{ currentResource.resource.data.lastName }}</li>
+      <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.phoneNumber }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.email }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Equipment</h3>
+  </div>
+  <div class="panel-body">
+    <div ng-if="equipment.length == 0" class="alert alert-info" role="alert">
+      There is no equipment recorded for this customer. Click <strong>New Equipment</strong> to add one.
+    </div>
+    <div ng-if="equipment.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Serial #</th>
+              <th>Model #</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="eq in equipment" class="clickable-table-row" ng-click="$state.go('equipment.view', {equipmentId: eq._id})">
+              <td>{{ eq.data.serialNumber }}</td>
+              <td>{{ eq.data.modelNumber }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <bgf-pagination collection="equipment" url="equipmentUrl" url-params="urlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+  </div>
+  <div class="panel-footer">
+    <a ui-sref="equipmentCreate()" class="btn btn-primary">
+      <i class="glyphicon glyphicon-plus"></i> New Equipment
+    </a>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Appointments</h3>
+  </div>
+  <div class="panel-body">
+    <div ng-if="appointments.length == 0" class="alert alert-info" role="alert">
+      There are no scheduled appointments for this customer. Click <strong>New Appointment</strong> to add one.
+    </div>
+    <div ng-if="appointments.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Technician</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr data-ng-repeat="appointment in appointments" class="clickable-table-row" ng-click="$state.go('appointment.view', {appointmentId: appointment._id})">
+            <td>{{ appointment.data.appointmentTime }}</td>
+            <td><a ui-sref="contractor.view({contractorId: appointment.data.assignedContractor._id})">{{ appointment.data.assignedContractor.data.name }}</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <bgf-pagination collection="appointments" url="appointmentsUrl" url-params="urlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+  </div>
+  <div class="panel-footer">
+    <a ui-sref="appointmentCreate()" class="btn btn-primary">
+      <i class="glyphicon glyphicon-plus"></i> New Appointment
+    </a>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Forms</h3>
+  </div>
+  <div class="panel-body">
+    <div ng-repeat="form in forms">
+      <h3>{{ form.title }}s</h3>
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr ng-repeat="submission in formSubmissions[form.name]">
+            <td><a class="btn btn-default" ng-click="gotoSubmission(form, submission)">{{ submission.created | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a' }}</a></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <a class="btn btn-primary" ui-sref="{{ form.name }}Create({customerId: currentResource.resource._id})">
+                New {{ form.title }}
+              </a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

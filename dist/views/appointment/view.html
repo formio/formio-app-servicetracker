@@ -1,0 +1,83 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Appointment</h3>
+  </div>
+  <div class="panel-body">
+    <p><strong>Appointment Time: </strong> {{ currentResource.resource.data.appointmentTime | date : 'medium' }}</p>
+    <p><strong>Assigned Contractor: </strong> {{ currentResource.resource.data.assignedContractor.data.name }}</p>
+    <h2>{{ currentResource.resource.data.customer.name }}</h2>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Customer Information</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.customer.data.firstName }} {{ currentResource.resource.data.customer.data.lastName }}</li>
+          <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.customer.data.phoneNumber }}</li>
+          <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.customer.data.email }}</li>
+          <li class="list-group-item"><strong>Address:</strong> {{ currentResource.resource.data.customer.data.address.formatted_address }}</li>
+        </ul>
+        <p><strong><a ui-sref="customer.view({customerId: currentResource.resource.data.customer._id})">View Customer Details</a></strong></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4>Services</h4>
+    <div ng-if="services.length == 0" class="alert alert-info" role="alert">
+      There were no services performed for this appointment. Click <strong>New Service</strong> to add one.
+    </div>
+    <div ng-if="services.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Service Performed</th>
+              <th>Service Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="service in services" class="clickable-table-row" ng-click="$state.go('service.view', {serviceId: service._id})">
+              <td>{{ service.data.servicePerformed }}</td>
+              <td>{{ service.data.serviceNotes | truncate : 100 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <bgf-pagination collection="services" url="servicesUrl" url-params="serviceUrlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+    <a ui-sref="serviceCreate({appointmentId: currentResource.resource._id})" class="btn btn-primary">
+      <i class="glyphicon glyphicon-plus"></i> New Service
+    </a>
+
+    <hr>
+
+    <h4>Time Entries</h4>
+    <div ng-if="timeclocks.length == 0" class="alert alert-info" role="alert">
+      There are no time entries for this appointment. Click <strong>New Time Entry</strong> to add one.
+    </div>
+    <div ng-if="timeclocks.length > 0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="time in timeclocks" class="clickable-table-row" ng-click="$state.go('timeclock.view', {timeclockId: time._id})">
+              <td>{{ time.data.time | date : 'medium' }}</td>
+              <td>{{ time.data.activity }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <bgf-pagination collection="timeclocks" url="timeclocksUrl" url-params="urlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+    <a ui-sref="timeclockCreate({appointmentId: currentResource.resource._id})" class="btn btn-primary">
+      <i class="glyphicon glyphicon-plus"></i> New Time Entry
+    </a>
+  </div>
+</div>

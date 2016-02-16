@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-success" ng-if="!isRole('admin')">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-building"></i> Dealer
+        </h3>
+      </div>
+      <div class="panel-body">
+        <formio src="dealerUrl" read-only="true"></formio>
+      </div>
+    </div>
+
+    <div class="panel panel-success" ng-if="isRole('admin')">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-building"></i> Dealers
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div ng-if="dealers.length == 0" class="alert alert-info" role="alert">
+          Could not find any dealers. Click <strong>New Dealer</strong> to add one.
+        </div>
+        <div ng-if="dealers.length > 0">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-repeat="dealer in dealers" class="clickable-table-row" ng-click="$state.go('dealer.view', {dealerId: dealer._id})">
+                  <td>{{ dealer.data.name }}</td>
+                  <td>{{ dealer.data.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <bgf-pagination collection="dealers" url="dealersUrl" url-params="urlParams" per-page="5" template-url="./views/pager.html"></bgf-pagination>
+      </div>
+      <div class="panel-footer">
+        <a ui-sref="dealerCreate()" class="btn btn-primary">
+          <i class="glyphicon glyphicon-plus"></i> New Dealer
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
