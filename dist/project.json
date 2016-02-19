@@ -1,7 +1,7 @@
 {
   "title": "Service Tracker",
   "description": "A service scheduling and tracking app.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "name": "servicetracker",
   "preview": {
     "url": "http://formio.github.io/formio-app-servicetracker",
@@ -14,7 +14,7 @@
       "admin": true,
       "default": false
     },
-    "agent": {
+    "contractor": {
       "title": "Contractor",
       "description": "A Contractor",
       "admin": false,
@@ -53,7 +53,7 @@
           "lockKey": true,
           "input": true,
           "placeholder": "Enter your email address",
-          "key": "admin.email",
+          "key": "email",
           "tableView": true,
           "protected": false,
           "label": "Admin Email",
@@ -69,7 +69,7 @@
           "lockKey": true,
           "prefix": "",
           "placeholder": "Enter your password",
-          "key": "admin.password",
+          "key": "password",
           "label": "Admin Password",
           "type": "password",
           "tableView": false,
@@ -97,7 +97,7 @@
           "roles": [
             "administrator",
             "anonymous",
-            "agent",
+            "contractor",
             "dealer"
           ]
         }
@@ -146,7 +146,6 @@
       "path": "dealer/login",
       "components": [
         {
-          "source": "56954496823ab301001b14a1",
           "lockKey": true,
           "validate": {
             "required": true
@@ -159,14 +158,13 @@
           "suffix": "",
           "prefix": "",
           "placeholder": "Enter your dealer email",
-          "key": "dealer.email",
+          "key": "email",
           "label": "Dealer Email",
           "inputType": "email",
           "tableView": true,
           "input": true
         },
         {
-          "source": "56954496823ab301001b14a1",
           "lockKey": true,
           "validate": {
             "required": true
@@ -177,7 +175,7 @@
           "suffix": "",
           "prefix": "",
           "placeholder": "Enter your dealer password",
-          "key": "dealer.password",
+          "key": "password",
           "label": "Dealer Password",
           "inputType": "password",
           "tableView": false,
@@ -203,7 +201,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -303,7 +301,7 @@
               "value": "5"
             }
           ],
-          "key": "howsatisfiedareyouwiththeserviceyoureceived",
+          "key": "satisfied",
           "label": "How satisfied are you with the service you received",
           "inputType": "radio",
           "tableView": true,
@@ -329,7 +327,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -361,19 +359,19 @@
         {
           "type": "create_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "read_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "update_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -393,7 +391,7 @@
           "tableView": true,
           "inputType": "email",
           "label": "Contractor Email",
-          "key": "contractor.email",
+          "key": "email",
           "placeholder": "Enter the email address",
           "prefix": "",
           "suffix": "",
@@ -406,7 +404,6 @@
             "required": true
           },
           "lockKey": true,
-          "source": "56954496823ab301001b149c",
           "isNew": false
         },
         {
@@ -414,7 +411,7 @@
           "tableView": false,
           "inputType": "password",
           "label": "Contractor Password",
-          "key": "contractor.password",
+          "key": "password",
           "placeholder": "Enter your contractor password",
           "prefix": "",
           "suffix": "",
@@ -425,7 +422,6 @@
             "required": true
           },
           "lockKey": true,
-          "source": "56954496823ab301001b149c",
           "isNew": false
         },
         {
@@ -448,7 +444,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -563,7 +559,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -595,19 +591,19 @@
         {
           "type": "create_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "read_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "update_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -665,7 +661,6 @@
                       },
                       "type": "resource",
                       "lockKey": true,
-                      "source": "56a3bf05e0a91b010033c46a",
                       "isNew": false
                     }
                   ]
@@ -678,7 +673,7 @@
                       "label": "Assigned Contractor",
                       "key": "appointment.assignedContractor",
                       "placeholder": "Contractor",
-                      "resource": "agent",
+                      "resource": "contractor",
                       "defaultValue": "",
                       "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
                       "selectFields": "",
@@ -693,7 +688,6 @@
                       },
                       "type": "resource",
                       "lockKey": true,
-                      "source": "56a3bf05e0a91b010033c46c",
                       "isNew": false
                     }
                   ]
@@ -1093,7 +1087,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -1150,7 +1144,6 @@
                       },
                       "type": "resource",
                       "lockKey": true,
-                      "source": "56a3bf05e0a91b010033c46a",
                       "isNew": false
                     }
                   ]
@@ -1163,7 +1156,7 @@
                       "label": "Assigned Contractor",
                       "key": "appointment.assignedContractor",
                       "placeholder": "Contractor",
-                      "resource": "agent",
+                      "resource": "contractor",
                       "defaultValue": "",
                       "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
                       "selectFields": "",
@@ -1178,7 +1171,6 @@
                       },
                       "type": "resource",
                       "lockKey": true,
-                      "source": "56a3bf05e0a91b010033c46c",
                       "isNew": false
                     }
                   ]
@@ -1214,7 +1206,6 @@
             },
             {
               "isNew": false,
-              "source": "56a3bf05e0a91b010033c46e",
               "lockKey": true,
               "type": "resource",
               "validate": {
@@ -1330,7 +1321,6 @@
                 },
                 {
                   "isNew": false,
-                  "source": "56a3bf05e0a91b010033c46e",
                   "lockKey": true,
                   "type": "textfield",
                   "validate": {
@@ -1358,7 +1348,6 @@
                 },
                 {
                   "isNew": false,
-                  "source": "56a3bf05e0a91b010033c46e",
                   "lockKey": true,
                   "type": "select",
                   "validate": {
@@ -1534,7 +1523,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -1583,12 +1572,12 @@
         "after"
       ]
     },
-    "action2": {
+    "agentRoleAssignment": {
       "title": "Role Assignment",
       "name": "role",
-      "form": "agent",
+      "form": "contractor",
       "settings": {
-        "role": "agent",
+        "role": "contractor",
         "association": "new",
         "type": "add"
       },
@@ -1600,7 +1589,7 @@
         "after"
       ]
     },
-    "action13": {
+    "adminRoleAssignment": {
       "title": "Role Assignment",
       "name": "role",
       "form": "admin",
@@ -1617,40 +1606,71 @@
         "after"
       ]
     },
-    "action14": {
-      "title": "Authentication",
-      "name": "auth",
+    "adminLogin": {
+      "name": "login",
+      "title": "Login",
       "form": "adminLoginForm",
+      "priority": 2,
+      "method": ["create"],
+      "handler": ["before"],
       "settings": {
-        "username": "admin.email",
-        "password": "admin.password",
-        "association": "existing"
-      },
-      "priority": 0,
-      "method": [
-        "create"
-      ],
-      "handler": [
-        "before"
-      ]
+        "resources": ["admin"],
+        "username": "email",
+        "password": "password"
+      }
     },
-    "auth": {
-      "title": "Authentication",
-      "name": "auth",
-      "form": "contractorLoginForm",
-      "settings": {
-        "association": "existing",
-        "role": "",
-        "username": "contractor.email",
-        "password": "contractor.password"
-      },
+    "adminLoginNoSubmit": {
+      "name": "nosubmit",
+      "title": "Skip Form Submission",
+      "form": "adminLoginForm",
       "priority": 0,
-      "method": [
-        "create"
-      ],
-      "handler": [
-        "before"
-      ]
+      "handler": ["before"],
+      "method": ["create"],
+      "settings": {}
+    },
+    "contractorLogin": {
+      "name": "login",
+      "title": "Login",
+      "form": "contractorLoginForm",
+      "priority": 2,
+      "method": ["create"],
+      "handler": ["before"],
+      "settings": {
+        "resources": ["contractor"],
+        "username": "email",
+        "password": "password"
+      }
+    },
+    "contractorLoginNoSubmit": {
+      "name": "nosubmit",
+      "title": "Skip Form Submission",
+      "form": "contractorLoginForm",
+      "priority": 0,
+      "handler": ["before"],
+      "method": ["create"],
+      "settings": {}
+    },
+    "dealerLogin": {
+      "name": "login",
+      "title": "Login",
+      "form": "dealerLoginForm",
+      "priority": 2,
+      "method": ["create"],
+      "handler": ["before"],
+      "settings": {
+        "resources": ["dealer"],
+        "username": "email",
+        "password": "password"
+      }
+    },
+    "dealerLoginNoSubmit": {
+      "name": "nosubmit",
+      "title": "Skip Form Submission",
+      "form": "dealerLoginForm",
+      "priority": 0,
+      "handler": ["before"],
+      "method": ["create"],
+      "settings": {}
     }
   },
   "resources": {
@@ -1739,7 +1759,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -1755,7 +1775,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -1965,9 +1985,8 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "55cd5c3ca51a96bef99ef54e",
             "anonymous",
-            "agent",
+            "contractor",
             "dealer"
           ]
         },
@@ -1995,7 +2014,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "dealer"
           ]
         },
@@ -2003,7 +2022,7 @@
           "type": "update_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "dealer"
           ]
         },
@@ -2016,7 +2035,7 @@
         {
           "type": "create_own",
           "roles": [
-            "agent",
+            "contractor",
             "dealer",
             "administrator"
           ]
@@ -2024,7 +2043,7 @@
         {
           "type": "read_own",
           "roles": [
-            "agent",
+            "contractor",
             "administrator",
             "dealer"
           ]
@@ -2032,7 +2051,7 @@
         {
           "type": "update_own",
           "roles": [
-            "agent",
+            "contractor",
             "dealer",
             "administrator"
           ]
@@ -2045,7 +2064,7 @@
         }
       ]
     },
-    "agent": {
+    "contractor": {
       "title": "Contractor",
       "type": "resource",
       "name": "contractor",
@@ -2168,9 +2187,8 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "55cd5c3ca51a96bef99ef54e",
             "anonymous",
-            "agent",
+            "contractor",
             "dealer"
           ]
         },
@@ -2199,7 +2217,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2225,7 +2243,7 @@
         {
           "type": "read_own",
           "roles": [
-            "agent",
+            "contractor",
             "dealer",
             "administrator"
           ]
@@ -2355,7 +2373,7 @@
           "roles": [
             "administrator",
             "anonymous",
-            "agent",
+            "contractor",
             "dealer"
           ]
         }
@@ -2434,7 +2452,7 @@
           "label": "Assigned Contractor",
           "key": "assignedContractor",
           "placeholder": "Contractor",
-          "resource": "agent",
+          "resource": "contractor",
           "defaultValue": "",
           "template": "<span>{{ item.data.name }} &lt;{{ item.data.email }}&gt;</span>",
           "selectFields": "",
@@ -2505,7 +2523,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -2521,7 +2539,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2542,7 +2560,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2719,7 +2737,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -2754,25 +2772,25 @@
         {
           "type": "create_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "read_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "update_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         },
         {
           "type": "delete_own",
           "roles": [
-            "agent"
+            "contractor"
           ]
         }
       ]
@@ -2886,7 +2904,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -2902,7 +2920,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2910,7 +2928,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2918,7 +2936,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -2926,7 +2944,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -3035,7 +3053,7 @@
           "type": "read_all",
           "roles": [
             "administrator",
-            "agent",
+            "contractor",
             "anonymous",
             "dealer"
           ]
@@ -3051,7 +3069,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -3059,7 +3077,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -3067,7 +3085,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
@@ -3075,7 +3093,7 @@
           "roles": [
             "administrator",
             "dealer",
-            "agent"
+            "contractor"
           ]
         },
         {
