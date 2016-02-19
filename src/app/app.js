@@ -160,51 +160,53 @@
               filter: {}
             }
           },
-          index: ['$scope', '$rootScope', '$stateParams',
-            function($scope, $rootScope, $params) {
-              $scope.contractors = [];
-              $scope.contractorsUrl = AppConfig.contractorForm + '/submission';
-              $scope.filter = $params.filter;
-              if(!$rootScope.isRole('admin')) {
-                var dealer = $rootScope.getDealer();
-                if (dealer) {
-                  $scope.filter['dealer._id'] = dealer._id;
+          controllers: {
+            index: ['$scope', '$rootScope', '$stateParams',
+              function($scope, $rootScope, $params) {
+                $scope.contractors = [];
+                $scope.contractorsUrl = AppConfig.contractorForm + '/submission';
+                $scope.filter = $params.filter;
+                if(!$rootScope.isRole('admin')) {
+                  var dealer = $rootScope.getDealer();
+                  if (dealer) {
+                    $scope.filter['dealer._id'] = dealer._id;
+                  }
+                }
+
+                $scope.urlParams = $rootScope.getUrlParams($scope.filter);
+              }
+            ],
+            create: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  $scope.submission.data = {
+                    dealer: $rootScope.getDealer()
+                  };
+                  hideFields($scope, FormioUtils, [
+                    'dealer'
+                  ]);
                 }
               }
-
-              $scope.urlParams = $rootScope.getUrlParams($scope.filter);
-            }
-          ],
-          create: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                $scope.submission.data = {
-                  dealer: $rootScope.getDealer()
-                };
-                hideFields($scope, FormioUtils, [
-                  'dealer'
-                ]);
+            ],
+            view: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                var hiddenFields = ['password', 'submit'];
+                if(!$rootScope.isRole('admin')) {
+                  hiddenFields.push('dealer');
+                }
+                hideFields($scope, FormioUtils, hiddenFields);
               }
-            }
-          ],
-          view: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              var hiddenFields = ['password', 'submit'];
-              if(!$rootScope.isRole('admin')) {
-                hiddenFields.push('dealer');
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  hideFields($scope, FormioUtils, [
+                    'dealer'
+                  ]);
+                }
               }
-              hideFields($scope, FormioUtils, hiddenFields);
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                hideFields($scope, FormioUtils, [
-                  'dealer'
-                ]);
-              }
-            }
-          ]
+            ]
+          }
         });
 
         FormioResourceProvider.register('customer', AppConfig.customerForm, {
@@ -226,80 +228,82 @@
               }
             }
           ],
-          index: ['$scope', '$rootScope', '$stateParams',
-            function($scope, $rootScope, $params) {
-              $scope.customers = [];
-              $scope.customersUrl = AppConfig.customerForm + '/submission';
-              $scope.filter = $params.filter;
-              $scope.showInactive = $params.showInactive;
-              if(!$rootScope.isRole('admin')) {
-                $scope.filter['dealer._id'] = $rootScope.getDealer()._id;
-              }
-              $scope.urlParams = $rootScope.getUrlParams($scope.filter);
-
-              if(!$scope.showInactive) {
-                $scope.urlParams['data.inactive'] = false;
-              }
-            }
-          ],
-          create: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                $scope.submission.data = {
-                  dealer: $rootScope.getDealer()
-                };
-                hideFields($scope, FormioUtils, [
-                  'dealer'
-                ]);
-              }
-            }
-          ],
-          view: ['$scope', '$rootScope', '$state', '$stateParams', 'Formio',
-            function($scope, $rootScope, $state, $stateParams, Formio) {
-              $scope.position = {lat: '40.74', lng: '-74.18'};
-              $scope.urlParams = {
-                'data.customer._id': $stateParams.customerId
-              };
-              $scope.$watch('currentResource.resource.data.address.geometry.location', function(location) {
-                if(!location) {
-                  return;
+          controllers: {
+            index: ['$scope', '$rootScope', '$stateParams',
+              function($scope, $rootScope, $params) {
+                $scope.customers = [];
+                $scope.customersUrl = AppConfig.customerForm + '/submission';
+                $scope.filter = $params.filter;
+                $scope.showInactive = $params.showInactive;
+                if(!$rootScope.isRole('admin')) {
+                  $scope.filter['dealer._id'] = $rootScope.getDealer()._id;
                 }
-                $scope.position.lat = location.lat;
-                $scope.position.lng = location.lng;
-              });
+                $scope.urlParams = $rootScope.getUrlParams($scope.filter);
 
-              $scope.equipment = [];
-              $scope.equipmentUrl = AppConfig.equipmentForm + '/submission';
-              $scope.appointments = [];
-              $scope.appointmentsUrl = AppConfig.appointmentForm + '/submission';
-              $scope.forms = AppConfig.forms;
-              $scope.formSubmissions = {};
-              $scope.gotoSubmission = function(form, submission) {
-                var params = {};
-                params[form.name + 'Id'] = submission._id;
-                params.customerId = submission.data.customer._id;
-                $state.go(form.name + '.view', params);
-              };
-
-              angular.forEach($scope.forms, function(form) {
-                $scope.formSubmissions[form.name] = [];
-                new Formio(form.form).loadSubmissions({params: {
-                  'data.customer._id': $stateParams.customerId
-                }}).then(function(subs) {
-                  $scope.formSubmissions[form.name] = subs;
-                });
-              });
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                hideFields($scope, FormioUtils, [
-                  'dealer'
-                ]);
+                if(!$scope.showInactive) {
+                  $scope.urlParams['data.inactive'] = false;
+                }
               }
-            }
-          ]
+            ],
+            create: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  $scope.submission.data = {
+                    dealer: $rootScope.getDealer()
+                  };
+                  hideFields($scope, FormioUtils, [
+                    'dealer'
+                  ]);
+                }
+              }
+            ],
+            view: ['$scope', '$rootScope', '$state', '$stateParams', 'Formio',
+              function($scope, $rootScope, $state, $stateParams, Formio) {
+                $scope.position = {lat: '40.74', lng: '-74.18'};
+                $scope.urlParams = {
+                  'data.customer._id': $stateParams.customerId
+                };
+                $scope.$watch('currentResource.resource.data.address.geometry.location', function(location) {
+                  if(!location) {
+                    return;
+                  }
+                  $scope.position.lat = location.lat;
+                  $scope.position.lng = location.lng;
+                });
+
+                $scope.equipment = [];
+                $scope.equipmentUrl = AppConfig.equipmentForm + '/submission';
+                $scope.appointments = [];
+                $scope.appointmentsUrl = AppConfig.appointmentForm + '/submission';
+                $scope.forms = AppConfig.forms;
+                $scope.formSubmissions = {};
+                $scope.gotoSubmission = function(form, submission) {
+                  var params = {};
+                  params[form.name + 'Id'] = submission._id;
+                  params.customerId = submission.data.customer._id;
+                  $state.go(form.name + '.view', params);
+                };
+
+                angular.forEach($scope.forms, function(form) {
+                  $scope.formSubmissions[form.name] = [];
+                  new Formio(form.form).loadSubmissions({params: {
+                    'data.customer._id': $stateParams.customerId
+                  }}).then(function(subs) {
+                    $scope.formSubmissions[form.name] = subs;
+                  });
+                });
+              }
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  hideFields($scope, FormioUtils, [
+                    'dealer'
+                  ]);
+                }
+              }
+            ]
+          }
         });
 
         FormioResourceProvider.register('dealer', AppConfig.dealerForm, {
@@ -312,49 +316,51 @@
               filter: {}
             }
           },
-          index: ['$scope', '$rootScope', '$stateParams', 'FormioUtils',
-            function($scope, $rootScope, $params, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                var dealer = $rootScope.getDealer();
-                if (dealer) {
-                  $scope.dealerUrl = AppConfig.dealerForm + '/submission/' + dealer._id;
-                  if(!$rootScope.isRole('dealer')) {
-                    hideFields($scope, FormioUtils, ['password']);
+          controllers: {
+            index: ['$scope', '$rootScope', '$stateParams', 'FormioUtils',
+              function($scope, $rootScope, $params, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  var dealer = $rootScope.getDealer();
+                  if (dealer) {
+                    $scope.dealerUrl = AppConfig.dealerForm + '/submission/' + dealer._id;
+                    if(!$rootScope.isRole('dealer')) {
+                      hideFields($scope, FormioUtils, ['password']);
+                    }
                   }
                 }
-              }
-              else {
-                $scope.dealers = [];
-                $scope.dealersUrl = AppConfig.dealerForm + '/submission';
-                $scope.filter = $params.filter;
-                $scope.urlParams = $rootScope.getUrlParams($scope.filter);
-              }
+                else {
+                  $scope.dealers = [];
+                  $scope.dealersUrl = AppConfig.dealerForm + '/submission';
+                  $scope.filter = $params.filter;
+                  $scope.urlParams = $rootScope.getUrlParams($scope.filter);
+                }
 
-            }
-          ],
-          create: ['$scope', '$rootScope', '$state',
-            function($scope, $rootScope, $state) {
-              if(!$rootScope.isRole('admin')) { $state.go('home'); }
-            }
-          ],
-          view: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              hideFields($scope, FormioUtils, [
-                'password',
-                'submit'
-              ]);
-            }
-          ],
-          edit: ['$scope', '$rootScope', '$state',
-            function($scope, $rootScope, $state) {
-              if(!$rootScope.isRole('admin')) { $state.go('home'); }
-            }
-          ],
-          delete: ['$scope', '$rootScope', '$state',
-            function($scope, $rootScope, $state) {
-              if(!$rootScope.isRole('admin')) { $state.go('home'); }
-            }
-          ]
+              }
+            ],
+            create: ['$scope', '$rootScope', '$state',
+              function($scope, $rootScope, $state) {
+                if(!$rootScope.isRole('admin')) { $state.go('home'); }
+              }
+            ],
+            view: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                hideFields($scope, FormioUtils, [
+                  'password',
+                  'submit'
+                ]);
+              }
+            ],
+            edit: ['$scope', '$rootScope', '$state',
+              function($scope, $rootScope, $state) {
+                if(!$rootScope.isRole('admin')) { $state.go('home'); }
+              }
+            ],
+            delete: ['$scope', '$rootScope', '$state',
+              function($scope, $rootScope, $state) {
+                if(!$rootScope.isRole('admin')) { $state.go('home'); }
+              }
+            ]
+          }
         });
 
         FormioResourceProvider.register('appointment', AppConfig.appointmentForm, {
@@ -367,58 +373,60 @@
               customer: null
             }
           },
-          create: ['$scope', '$rootScope', '$stateParams', 'FormioUtils',
-            function($scope, $rootScope, $params, FormioUtils) {
-              $scope.submission = {data: {}};
-              $scope.$watch('customer.resource', function(customer) {
-                if (!customer || !customer.data) { return; }
-                $scope.submission.data.customer = customer;
-                hideFields($scope, FormioUtils, ['customer']);
-              });
-
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var customerComponent = FormioUtils.getComponent(form.components, 'customer');
-                  var contractorComponent = FormioUtils.getComponent(form.components, 'assignedContractor');
-                  // Filter resource components to only show resources under dealer
-                  var params = {'data.dealer._id': $rootScope.getDealer()._id};
-                  customerComponent.params = params;
-                  contractorComponent.params = params;
+          controllers: {
+            create: ['$scope', '$rootScope', '$stateParams', 'FormioUtils',
+              function($scope, $rootScope, $params, FormioUtils) {
+                $scope.submission = {data: {}};
+                $scope.$watch('customer.resource', function(customer) {
+                  if (!customer || !customer.data) { return; }
+                  $scope.submission.data.customer = customer;
+                  hideFields($scope, FormioUtils, ['customer']);
                 });
-              }
 
-              if($rootScope.isRole('contractor')) {
-                $scope.submission.data.assignedContractor = $rootScope.user;
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var customerComponent = FormioUtils.getComponent(form.components, 'customer');
+                    var contractorComponent = FormioUtils.getComponent(form.components, 'assignedContractor');
+                    // Filter resource components to only show resources under dealer
+                    var params = {'data.dealer._id': $rootScope.getDealer()._id};
+                    customerComponent.params = params;
+                    contractorComponent.params = params;
+                  });
+                }
+
+                if($rootScope.isRole('contractor')) {
+                  $scope.submission.data.assignedContractor = $rootScope.user;
+                }
               }
-            }
-          ],
-          view: ['$scope', '$rootScope', '$stateParams',
-            function($scope, $rootScope, $params) {
-              $scope.timeclocks = [];
-              $scope.timeclocksUrl = AppConfig.timeclockForm + '/submission';
-              $scope.urlParams = {sort: 'data.time'};
-              $scope.services = [];
-              $scope.servicesUrl = AppConfig.serviceForm + '/submission';
-              $scope.serviceUrlParams = {
-                'data.appointment._id': $params.appointmentId,
-                sort: 'created'
-              };
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var customerComponent = FormioUtils.getComponent(form.components, 'customer');
-                  var contractorComponent = FormioUtils.getComponent(form.components, 'assignedContractor');
-                  // Filter resource components to only show resources under dealer
-                  var params = {'data.dealer._id': $rootScope.getDealer()._id};
-                  customerComponent.params = params;
-                  contractorComponent.params = params;
-                });
+            ],
+            view: ['$scope', '$rootScope', '$stateParams',
+              function($scope, $rootScope, $params) {
+                $scope.timeclocks = [];
+                $scope.timeclocksUrl = AppConfig.timeclockForm + '/submission';
+                $scope.urlParams = {sort: 'data.time'};
+                $scope.services = [];
+                $scope.servicesUrl = AppConfig.serviceForm + '/submission';
+                $scope.serviceUrlParams = {
+                  'data.appointment._id': $params.appointmentId,
+                  sort: 'created'
+                };
               }
-            }
-          ]
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var customerComponent = FormioUtils.getComponent(form.components, 'customer');
+                    var contractorComponent = FormioUtils.getComponent(form.components, 'assignedContractor');
+                    // Filter resource components to only show resources under dealer
+                    var params = {'data.dealer._id': $rootScope.getDealer()._id};
+                    customerComponent.params = params;
+                    contractorComponent.params = params;
+                  });
+                }
+              }
+            ]
+          }
         });
 
         FormioResourceProvider.register('timeclock', AppConfig.timeclockForm, {
@@ -431,76 +439,78 @@
           templates: {
             view: 'views/timeclock/view.html'
           },
-          create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
-            function($scope, $rootScope, $params, Formio, FormioUtils) {
-              $scope.submission = {data: {}};
-              $scope.$watch('appointment.resource', function(appointment) {
-                if (!appointment || !appointment.data) { return; }
-                $scope.submission.data.appointment = appointment;
-                hideFields($scope, FormioUtils, ['appointment']);
-              });
+          controllers: {
+            create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
+              function($scope, $rootScope, $params, Formio, FormioUtils) {
+                $scope.submission = {data: {}};
+                $scope.$watch('appointment.resource', function(appointment) {
+                  if (!appointment || !appointment.data) { return; }
+                  $scope.submission.data.appointment = appointment;
+                  hideFields($scope, FormioUtils, ['appointment']);
+                });
 
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
-                  // Filter resource components to only show resources under dealer
-                  var params;
-                  if($rootScope.isRole('dealer')) {
-                    params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
-                  }
-                  if($rootScope.isRole('contractor')) {
-                    params = {'data.assignedContractor._id': $rootScope.user._id};
-                  }
-                  appointmentComponent.params = params;
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
+                    // Filter resource components to only show resources under dealer
+                    var params;
+                    if($rootScope.isRole('dealer')) {
+                      params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
+                    }
+                    if($rootScope.isRole('contractor')) {
+                      params = {'data.assignedContractor._id': $rootScope.user._id};
+                    }
+                    appointmentComponent.params = params;
+                  });
+                }
+                $scope.$on('formSubmit', function($event, submission) {
+                  submission.owner = submission.data.appointment.data.assignedContractor._id;
                 });
-              }
-              $scope.$on('formSubmit', function($event, submission) {
-                submission.owner = submission.data.appointment.data.assignedContractor._id;
-              });
 
-              // Add geolocation data if available
-              if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                  $scope.submission.data.gpsLatitude = position.coords.latitude;
-                  $scope.submission.data.gpsLongitude = position.coords.longitude;
-                }, function() {
-                  console.warn("Unable to retrieve location");
+                // Add geolocation data if available
+                if(navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    $scope.submission.data.gpsLatitude = position.coords.latitude;
+                    $scope.submission.data.gpsLongitude = position.coords.longitude;
+                  }, function() {
+                    console.warn("Unable to retrieve location");
+                  });
+                }
+                else {
+                  console.warn("Geolocation is not supported. Cannot add GPS data to this time entry.");
+                }
+              }
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
+                    // Filter resource components to only show resources under dealer
+                    var params;
+                    if($rootScope.isRole('dealer')) {
+                      params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
+                    }
+                    if($rootScope.isRole('contractor')) {
+                      params = {'data.assignedContractor._id': $rootScope.user._id};
+                    }
+                    appointmentComponent.params = params;
+                  });
+                }
+                $scope.$on('formSubmit', function($event, submission) {
+                  submission.owner = submission.data.appointment.data.assignedContractor._id;
                 });
               }
-              else {
-                console.warn("Geolocation is not supported. Cannot add GPS data to this time entry.");
-              }
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
-                  // Filter resource components to only show resources under dealer
-                  var params;
-                  if($rootScope.isRole('dealer')) {
-                    params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
-                  }
-                  if($rootScope.isRole('contractor')) {
-                    params = {'data.assignedContractor._id': $rootScope.user._id};
-                  }
-                  appointmentComponent.params = params;
+            ],
+            delete: ['$scope', '$rootScope', '$state',
+              function($scope, $rootScope, $state) {
+                $scope.$on('delete', function() {
+                  $state.go('appointment.view', {appointmentId: $scope.currentResource.resource.data.appointment._id});
                 });
+                return true;
               }
-              $scope.$on('formSubmit', function($event, submission) {
-                submission.owner = submission.data.appointment.data.assignedContractor._id;
-              });
-            }
-          ],
-          delete: ['$scope', '$rootScope', '$state',
-            function($scope, $rootScope, $state) {
-              $scope.$on('delete', function() {
-                $state.go('appointment.view', {appointmentId: $scope.currentResource.resource.data.appointment._id});
-              });
-              return true;
-            }
-          ]
+            ]
+          }
         });
 
         FormioResourceProvider.register('equipment', AppConfig.equipmentForm, {
@@ -513,40 +523,42 @@
           templates: {
             view: 'views/equipment/view.html'
           },
-          create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
-            function($scope, $rootScope, $params, Formio, FormioUtils) {
-              $scope.submission = {data: {}};
-              $scope.$watch('customer', function(customer) {
-                if (!customer.resource || !customer.resource.data) { return; }
-                $scope.submission.data.customer = customer.resource;
-              }, true);
-              hideFields($scope, FormioUtils, ['customer']);
+          controllers: {
+            create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
+              function($scope, $rootScope, $params, Formio, FormioUtils) {
+                $scope.submission = {data: {}};
+                $scope.$watch('customer', function(customer) {
+                  if (!customer.resource || !customer.resource.data) { return; }
+                  $scope.submission.data.customer = customer.resource;
+                }, true);
+                hideFields($scope, FormioUtils, ['customer']);
 
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var customerComponent = FormioUtils.getComponent(form.components, 'customer');
-                  // Filter resource components to only show customer under dealer
-                  var params = {'data.dealer._id': $rootScope.getDealer()._id};
-                  customerComponent.params = params;
-                });
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var customerComponent = FormioUtils.getComponent(form.components, 'customer');
+                    // Filter resource components to only show customer under dealer
+                    var params = {'data.dealer._id': $rootScope.getDealer()._id};
+                    customerComponent.params = params;
+                  });
+                }
               }
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              hideFields($scope, FormioUtils, [
-                'customer'
-              ]);
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var customerComponent = FormioUtils.getComponent(form.components, 'customer');
-                  // Filter resource components to only show customer under dealer
-                  var params = {'data.dealer._id': $rootScope.getDealer()._id};
-                  customerComponent.params = params;
-                });
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                hideFields($scope, FormioUtils, [
+                  'customer'
+                ]);
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var customerComponent = FormioUtils.getComponent(form.components, 'customer');
+                    // Filter resource components to only show customer under dealer
+                    var params = {'data.dealer._id': $rootScope.getDealer()._id};
+                    customerComponent.params = params;
+                  });
+                }
               }
-            }
-          ]
+            ]
+          }
         });
 
         FormioResourceProvider.register('service', AppConfig.serviceForm, {
@@ -554,52 +566,54 @@
           templates: {
             view: 'views/service/view.html'
           },
-          create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
-            function($scope, $rootScope, $params, Formio, FormioUtils) {
-              $scope.submission = {data: {}};
-              $scope.$watch('appointment', function(appointment) {
-                if (!appointment || !appointment.resource) { return; }
-                $scope.submission.data.appointment = appointment.resource;
-              }, true);
-              hideFields($scope, FormioUtils, ['appointment']);
+          controllers: {
+            create: ['$scope', '$rootScope', '$stateParams', 'Formio', 'FormioUtils',
+              function($scope, $rootScope, $params, Formio, FormioUtils) {
+                $scope.submission = {data: {}};
+                $scope.$watch('appointment', function(appointment) {
+                  if (!appointment || !appointment.resource) { return; }
+                  $scope.submission.data.appointment = appointment.resource;
+                }, true);
+                hideFields($scope, FormioUtils, ['appointment']);
 
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
-                  // Filter resource components to only show appointment under dealer
-                  var params;
-                  if($rootScope.isRole('dealer')) {
-                    params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
-                  }
-                  if($rootScope.isRole('contractor')) {
-                    params = {'data.assignedContractor._id': $rootScope.user._id};
-                  }
-                  appointmentComponent.params = params;
-                });
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
+                    // Filter resource components to only show appointment under dealer
+                    var params;
+                    if($rootScope.isRole('dealer')) {
+                      params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
+                    }
+                    if($rootScope.isRole('contractor')) {
+                      params = {'data.assignedContractor._id': $rootScope.user._id};
+                    }
+                    appointmentComponent.params = params;
+                  });
+                }
               }
-            }
-          ],
-          edit: ['$scope', '$rootScope', 'FormioUtils',
-            function($scope, $rootScope, FormioUtils) {
-              hideFields($scope, FormioUtils, [
-                'appointment'
-              ]);
-              if(!$rootScope.isRole('admin')) {
-                $scope.$on('formLoad', function($event, form) {
-                  var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
-                  // Filter resource components to only show appointment under dealer
-                  var params;
-                  if($rootScope.isRole('dealer')) {
-                    params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
-                  }
-                  if($rootScope.isRole('contractor')) {
-                    params = {'data.assignedContractor._id': $rootScope.user._id};
-                  }
-                  appointmentComponent.params = params;
-                });
+            ],
+            edit: ['$scope', '$rootScope', 'FormioUtils',
+              function($scope, $rootScope, FormioUtils) {
+                hideFields($scope, FormioUtils, [
+                  'appointment'
+                ]);
+                if(!$rootScope.isRole('admin')) {
+                  $scope.$on('formLoad', function($event, form) {
+                    var appointmentComponent = FormioUtils.getComponent(form.components, 'appointment');
+                    // Filter resource components to only show appointment under dealer
+                    var params;
+                    if($rootScope.isRole('dealer')) {
+                      params = {'data.customer.data.dealer._id': $rootScope.getDealer()._id};
+                    }
+                    if($rootScope.isRole('contractor')) {
+                      params = {'data.assignedContractor._id': $rootScope.user._id};
+                    }
+                    appointmentComponent.params = params;
+                  });
+                }
               }
-            }
-          ]
+            ]
+          }
         });
 
         // Register each of the forms.
@@ -611,20 +625,22 @@
                 customerId: null
               }
             },
-            create: ['$scope', '$rootScope', '$state', '$stateParams', 'Formio', 'FormioUtils',
-              function($scope, $rootScope, $state, $params, Formio, FormioUtils) {
-                $scope.submission = {data: {}};
-                $scope.$watch('customer', function(customer) {
-                  if (!customer.resource || !customer.resource.data) { return; }
-                  $scope.submission.data.customer = customer.resource;
-                }, true);
-                hideFields($scope, FormioUtils, ['customer']);
-                $scope.$on('formSubmission', function() {
-                  $state.go('customer.view');
-                });
-                return {handle: true};
-              }
-            ]
+            controllers: {
+              create: ['$scope', '$rootScope', '$state', '$stateParams', 'Formio', 'FormioUtils',
+                function($scope, $rootScope, $state, $params, Formio, FormioUtils) {
+                  $scope.submission = {data: {}};
+                  $scope.$watch('customer', function(customer) {
+                    if (!customer.resource || !customer.resource.data) { return; }
+                    $scope.submission.data.customer = customer.resource;
+                  }, true);
+                  hideFields($scope, FormioUtils, ['customer']);
+                  $scope.$on('formSubmission', function() {
+                    $state.go('customer.view');
+                  });
+                  return {handle: true};
+                }
+              ]
+            }
           });
         });
 

@@ -19,7 +19,7 @@ function browserSyncInit(baseDir, browser) {
     routes = {
       '/bower_components': 'bower_components',
       '/fonts': 'bower_components/font-awesome/fonts',
-      '/fonts/bootstrap': 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap'
+      '/fonts/bootstrap': 'bower_components/bootstrap-sass/assets/fonts/bootstrap'
     };
   }
 
