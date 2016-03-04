@@ -1533,6 +1533,114 @@
     }
   },
   "actions": {
+    "dealerSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "dealer",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "customerSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "customer",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "contractorSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "contractor",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "adminSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "admin",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "appointmentSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "appointment",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "timeClockSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "timeClock",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "equipmentSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "equipment",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "serviceSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "service",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "customerSurveySave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "customerForm1",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "serviceAgreementSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "serviceAgreement",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "partReplacementSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "partReplacement",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
+    "rmaFormSave": {
+      "title": "Save Submission",
+      "name": "save",
+      "form": "rmaForm",
+      "handler": ["before"],
+      "method": ["create", "update"],
+      "priority": 11,
+      "settings": {}
+    },
     "role": {
       "title": "Role Assignment",
       "name": "role",
