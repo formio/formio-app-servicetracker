@@ -1,7 +1,7 @@
 {
   "title": "Service Tracker",
   "description": "A service scheduling and tracking app.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "name": "servicetracker",
   "preview": {
     "url": "http://formio.github.io/formio-app-servicetracker",
@@ -1619,15 +1619,6 @@
         "password": "password"
       }
     },
-    "adminLoginNoSubmit": {
-      "name": "nosubmit",
-      "title": "Skip Form Submission",
-      "form": "adminLoginForm",
-      "priority": 0,
-      "handler": ["before"],
-      "method": ["create"],
-      "settings": {}
-    },
     "contractorLogin": {
       "name": "login",
       "title": "Login",
@@ -1641,15 +1632,6 @@
         "password": "password"
       }
     },
-    "contractorLoginNoSubmit": {
-      "name": "nosubmit",
-      "title": "Skip Form Submission",
-      "form": "contractorLoginForm",
-      "priority": 0,
-      "handler": ["before"],
-      "method": ["create"],
-      "settings": {}
-    },
     "dealerLogin": {
       "name": "login",
       "title": "Login",
@@ -1662,15 +1644,6 @@
         "username": "email",
         "password": "password"
       }
-    },
-    "dealerLoginNoSubmit": {
-      "name": "nosubmit",
-      "title": "Skip Form Submission",
-      "form": "dealerLoginForm",
-      "priority": 0,
-      "handler": ["before"],
-      "method": ["create"],
-      "settings": {}
     }
   },
   "resources": {
