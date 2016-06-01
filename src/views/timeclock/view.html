@@ -5,9 +5,8 @@
   <div class="panel-body">
     <p><strong>Time: </strong> {{ currentResource.resource.data.time | date : 'medium' }}</p>
     <p><strong>Activity: </strong> {{ currentResource.resource.data.activity }}</p>
-    <p><strong>Contractor: </strong> {{ currentResource.resource.data.appointment.data.assignedContractor.data.name }}</p>
+    <p><strong>Contractor: </strong> {{ currentResource.resource.data.appointment.data.contractor.data.name }}</p>
     <p><strong>Appointment: </strong> {{ currentResource.resource.data.appointment.data.appointmentTime | date : 'medium' }}</p>
-    <p><strong><a ui-sref="appointment.view({appointmentId: currentResource.resource.data.appointment._id})">View Appointment Details</a></strong></p>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Customer Information</h3>
@@ -18,12 +17,11 @@
           <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.appointment.data.customer.data.phoneNumber }}</li>
           <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.appointment.data.customer.data.email }}</li>
         </ul>
-        <p><strong><a ui-sref="customer.view({customerId: currentResource.resource.data.appointment.data.customer._id})">View Customer Details</a></strong></p>
       </div>
     </div>
-    <div ng-if="currentResource.resource.data.gpsLatitude && currentResource.resource.data.gpsLongitude">
-      <p><strong>Location: </strong> {{currentResource.resource.data.gpsLatitude}}, {{currentResource.resource.data.gpsLongitude}}</p>
-      <map zoom="8" center="[{{ currentResource.resource.data.gpsLatitude }}, {{ currentResource.resource.data.gpsLongitude }}]"> <marker position="[{{ currentResource.resource.data.gpsLatitude }}, {{ currentResource.resource.data.gpsLongitude }}]" visible></marker></map>
+    <div ng-if="currentResource.resource.data.location">
+      <p><strong>Location: </strong> {{currentResource.resource.data.location[0] }}, {{currentResource.resource.data.gpsLongitude[1] }}</p>
+      <map zoom="8" center="{{ currentResource.resource.data.location }}"> <marker position="{{ currentResource.resource.data.location }}" visible></marker></map>
     </div>
 
   </div>

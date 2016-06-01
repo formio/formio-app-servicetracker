@@ -1,6 +1,6 @@
 var appUrl = '{{ protocol }}://{{ path }}.{{ host }}';
 var apiUrl = '{{ protocol }}://api.{{ host }}';
-angular.module('formioServiceTrackerApp').constant('AppConfig', {
+angular.module('serviceTracker').constant('AppConfig', {
   appUrl: appUrl,
   apiUrl: apiUrl,
   dealerLoginForm: appUrl + '/dealer/login',

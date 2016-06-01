@@ -2,13 +2,7 @@ $body-bg: #fafafa;
 @import "bower_components/bootswatch/yeti/_variables.scss";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "bower_components/bootswatch/yeti/_bootswatch.scss";
-
-/**
- *  Do not remove this comments bellow. It's the markers used by wiredep to inject
- *  sass dependencies when defined in the bower.json of your dependencies
- */
-// bower:scss
-// endbower
+@import "bower_components/font-awesome/scss/font-awesome.scss";
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -21,119 +15,11 @@ $body-bg: #fafafa;
   padding: 0.2em 0;
 }
 
-.navbar {
-  margin-bottom: 0;
+#content {
+  margin-top: 60px;
 }
 
-.panel {
-  background-color: $body-bg;
-}
-
-body {
-  background-color: #ccc;
-}
-
-.logo {
-  font-family: 'Vast Shadow', cursive;
-  font-size: 2em
-}
-
-.dropdown-menu {
-  font-size: 18px
-}
-
-ul.dropdown-menu {
-  padding-bottom: 5px
-}
-
-table {
-  font-size: 14px
-}
-
-.navbar {
-  min-height: 65px;
-}
-
-.main-content {
-  background-color: #fff;
-  padding-top: 15px;
-  hr {
-    margin-bottom: 4px;
-  }
-  form {
-    background-color: $body-bg;
-    padding: 10px;
-  }
-}
-
-.nav-tabs {
+.nav.nav-tabs {
   margin-bottom: 10px;
 }
 
-.navbar-default {
-  background-color: #222;
-  .navbar-nav {
-    margin-left: 20px;
-    & > li {
-      font-size: 1.4em;
-      a {
-        padding-top: 20px;
-        height: 65px;
-        background-color: #222;
-        &:hover {
-          background-color: #333;
-        }
-      }
-      &.active {
-        & > a {
-          background-color: #222;
-          &:hover {
-            background-color: #333;
-          }
-        }
-      }
-    }
-  }
-}
-
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  outline: none;
-  background: white;
-  cursor: inherit;
-  display: block;
-}
-
-.clickable-table-row {
-  &:hover {
-    background-color: rgba(0, 0, 0, .025);
-  }
-  &:active {
-    background-color: rgba(0, 0, 0, .05);
-  }
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/**
- *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
- *  all your sass files automatically
- */
-// injector
-// endinjector

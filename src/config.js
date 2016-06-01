@@ -1,5 +1,5 @@
-var APP_URL = 'https://yourapp.form.io';
-var API_URL = 'https://api.form.io';
+var APP_URL = 'http://nvrqrxjtvgkmnuz.localhost:3000';
+var API_URL = 'http://api.localhost:3000';
 
 // Parse query string
 var query = {};
@@ -9,32 +9,48 @@ location.search.substr(1).split("&").forEach(function(item) {
 
 var appUrl = query.appUrl || APP_URL;
 var apiUrl = query.apiUrl || API_URL;
-
-angular.module('formioServiceTrackerApp').constant('AppConfig', {
+angular.module('serviceTracker').constant('AppConfig', {
   appUrl: appUrl,
-  apiUrl: query.apiUrl || API_URL,
+  apiUrl: apiUrl,
   company: query.company || 'Service Tracker',
   icon: query.icon || 'assets/images/logo.png',
-  dealerLoginForm: appUrl + '/dealer/login',
-  adminLoginForm: appUrl + '/admin/login',
-  contractorLoginForm: appUrl + '/contractor/login',
-  contractorForm: appUrl + '/contractor',
-  timeclockForm: appUrl + '/contractor/timeclock',
-  customerForm: appUrl + '/customer',
-  equipmentForm: appUrl + '/customer/equipment',
-  dealerForm: appUrl + '/dealer',
-  appointmentForm: appUrl + '/appointment',
-  serviceForm: appUrl + '/appointment/service',
-  forms: [
-    {
-      title: 'Agreement',
-      name: 'agreement',
-      form: appUrl + '/agreement'
+  forms: {
+    userForm: appUrl + '/user',
+    userLoginForm: appUrl + '/user/login',
+    appointmentForm: appUrl + '/appointment'
+  },
+  roles: [
+    'Contractor',
+    'Dealer'
+  ],
+  resources: {
+    dealer: {
+      form: appUrl + '/dealer',
+      resource: 'DealerResource'
     },
-    {
-      title: 'Survey',
-      name: 'survey',
-      form: appUrl + '/survey'
+    customer: {
+      form: appUrl + '/customer',
+      resource: 'CustomerResource'
+    },
+    contractor: {
+      form: appUrl + '/contractor',
+      resource: 'ContractorResource'
+    },
+    appointment: {
+      form: appUrl + '/appointment',
+      resource: 'AppointmentResource'
+    },
+    timeclock: {
+      form: appUrl + '/timeclock',
+      resource: 'TimeClockResource'
+    },
+    equipment: {
+      form: appUrl + '/equipment',
+      resource: 'EquipmentResource'
+    },
+    service: {
+      form: appUrl + '/service',
+      resource: 'ServiceResource'
     }
-  ]
+  }
 });
