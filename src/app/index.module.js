@@ -28,6 +28,6 @@
 
           return deferred.promise;
         }
-      }
+      };
     }]);
 })();
