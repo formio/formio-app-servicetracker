@@ -113,7 +113,9 @@ gulp.task('views', function() {
 
 gulp.task('config', function() {
   return gulp.src([
-    path.join(conf.paths.src, '/config.js')
+    path.join(conf.paths.src, '/config.js'),
+    path.join(conf.paths.src, '/config.template.js'),
+    path.join(conf.paths.src, '/project.json')
   ]).pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
 
