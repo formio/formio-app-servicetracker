@@ -18,6 +18,19 @@
       .state('home', {
         url: '/?',
         templateUrl: 'views/home.html'
+      })
+      .state('appointments', {
+        url: '/appointments',
+        templateUrl: 'views/appointment/all.html',
+        controller: ['$scope', '$state', '$rootScope', function($scope, $state, $rootScope) {
+          $scope.$on('rowView', function(event, appointment) {
+            $state.go('dealer.customer.appointment.view', {
+              dealerId: $rootScope.user.data.dealer._id,
+              customerId: appointment.data.customer._id,
+              appointmentId: appointment._id
+            });
+          });
+        }]
       });
 
     // Register all of the resources.
