@@ -2,6 +2,12 @@ Example service tracker application using Form.io
 ---------------------------------
 This is an example project that integrates into Form.io.
 
+Walkthrough Tutorial
+--------------------
+This application has a complete walkthrough tuturial associated with it. We recommend checking this out so that you can get a really good idea on how this application was structured.
+
+https://help.form.io/tutorials/walkthroughs/#servicetracker
+
 Installation
 --------------
 You can easily get this application running by typing the following in your command line.
