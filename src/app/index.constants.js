@@ -1,10 +1,9 @@
-/* global malarkey:false, moment:false */
+/* global moment:false */
 (function() {
   'use strict';
 
   angular
     .module('servicetracker')
-    .constant('malarkey', malarkey)
     .constant('moment', moment);
 
 })();
