@@ -14,7 +14,7 @@ location.search.substr(1).split("&").forEach(function(item) {
 
 var appUrl = query.appUrl || APP_URL;
 var apiUrl = query.apiUrl || API_URL;
-angular.module('serviceTracker').constant('AppConfig', {
+angular.module('servicetracker').constant('AppConfig', {
   appUrl: appUrl,
   apiUrl: apiUrl,
   company: query.company || 'Service Tracker',
