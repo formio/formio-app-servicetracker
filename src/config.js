@@ -1,5 +1,5 @@
-var APP_URL = 'http://nvrqrxjtvgkmnuz.localhost:3000';
-var API_URL = 'http://api.localhost:3000';
+var APP_URL = 'https://mllmxwjkpjflwtw.form.io';
+var API_URL = 'https://api.form.io';
 
 // Parse query string
 var query = {};
@@ -9,7 +9,7 @@ location.search.substr(1).split("&").forEach(function(item) {
 
 var appUrl = query.appUrl || APP_URL;
 var apiUrl = query.apiUrl || API_URL;
-angular.module('serviceTracker').constant('AppConfig', {
+angular.module('servicetracker').constant('AppConfig', {
   appUrl: appUrl,
   apiUrl: apiUrl,
   company: query.company || 'Service Tracker',

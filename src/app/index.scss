@@ -1,12 +1,12 @@
-$body-bg: #fafafa;
 @import "bower_components/bootswatch/yeti/_variables.scss";
+$brand-primary:         #2780E3;
+$brand-success:         #3FB618;
+$brand-info:            #9954BB;
+$brand-warning:         #FF7518;
+$brand-danger:          #FF0039;
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "bower_components/bootswatch/yeti/_bootswatch.scss";
 @import "bower_components/font-awesome/scss/font-awesome.scss";
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
 
 .browsehappy {
   margin: 0.2em 0;
@@ -15,11 +15,6 @@ $body-bg: #fafafa;
   padding: 0.2em 0;
 }
 
-#content {
-  margin-top: 60px;
-}
-
-.nav.nav-tabs {
+.nav-tabs {
   margin-bottom: 10px;
 }
-

@@ -1,26 +1,29 @@
 (function() {
-  /* global _, navigator, console */
   'use strict';
+
   angular
-    .module('serviceTracker')
-    .run([
-      'FormioAuth',
-      'AppConfig',
-      '$rootScope',
-      function(
-        FormioAuth,
-        AppConfig,
-        $rootScope
-      ) {
-        FormioAuth.init();
+    .module('servicetracker')
+    .run(runBlock);
 
-        // Set the config object.
-        $rootScope.config = AppConfig;
+  /** @ngInject */
+  function runBlock(
+    $log,
+    $rootScope,
+    AppConfig,
+    FormioAuth
+  ) {
+    // Initialize the Form.io authentication system.
+    FormioAuth.init();
 
-        // Add the forms to the root scope.
-        angular.forEach(AppConfig.forms, function(url, form) {
-          $rootScope[form] = url;
-        });
-      }
-    ]);
+    // Allow the app to have access to configurations.
+    $rootScope.config = AppConfig;
+
+    // Add the forms to the root scope.
+    angular.forEach(AppConfig.forms, function(url, form) {
+      $rootScope[form] = url;
+    });
+
+    $log.debug('runBlock end');
+  }
+
 })();

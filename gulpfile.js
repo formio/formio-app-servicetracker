@@ -27,10 +27,3 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
 gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
-
-var s3 = require("gulp-s3");
-gulp.task('deploy', ['build'], function () {
-  return gulp.src('./dist/**/*').pipe(s3(require('./aws.json'), {
-    uploadPath: "/watsco/",
-  }));
-});

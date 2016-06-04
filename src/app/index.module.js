@@ -1,12 +1,15 @@
-(function () {
+(function() {
   'use strict';
   angular
-    .module('serviceTracker', [
-      'formio',
-      'ngFormioHelper',
+    .module('servicetracker', [
+      'ngSanitize',
+      'ngAria',
       'ui.router',
+      'ui.bootstrap',
+      'toastr',
       'ngMap',
-      'angularMoment'
+      'formio',
+      'ngFormioHelper'
     ])
     .factory('Geolocation', ['$q', '$window', function($q, $window) {
       return {
