@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var APP_URL = 'https://mllmxwjkpjflwtw.form.io';
+=======
+var APP_URL = 'https://yourapp.form.io';
+>>>>>>> eb039e6755493d11edf0c71db83dd27b084d9053
 var API_URL = 'https://api.form.io';
 
 // Parse query string
