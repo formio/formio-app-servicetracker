@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" ng-if="isDealer">
+<ul class="nav nav-tabs" ng-if="isDealer || isAdmin">
   <li role="presentation" ng-class="{active: isActive('dealer.view')}"><a ui-sref="dealer.view()">View</a></li>
   <li role="presentation" ng-class="{active: isActive('dealer.customer')}"><a ui-sref="dealer.customerIndex()">Customers</a></li>
   <li role="presentation" ng-class="{active: isActive('dealer.contractor')}"><a ui-sref="dealer.contractorIndex()">Contractors</a></li>

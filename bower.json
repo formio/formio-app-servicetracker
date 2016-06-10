@@ -15,7 +15,7 @@
     "bootswatch": "^3.3.6+2",
     "font-awesome": "^4.6.3",
     "ng-formio": "^1.8.8",
-    "ng-formio-helper": "^0.17.0",
+    "ng-formio-helper": "^0.17.1",
     "ngmap": "^1.17.3"
   },
   "devDependencies": {
