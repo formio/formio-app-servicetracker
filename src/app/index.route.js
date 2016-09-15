@@ -22,6 +22,7 @@
       .state('appointments', {
         url: '/appointments',
         templateUrl: 'views/appointment/all.html',
+        controllerAs: 'appointments',
         controller: ['$scope', '$state', '$rootScope', function($scope, $state, $rootScope) {
           $scope.$on('rowView', function(event, appointment) {
             $state.go('dealer.customer.appointment.view', {
