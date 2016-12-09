@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "description": "The Service Tracker Application.",
   "preview": {
-    "url": "http://formio.github.io/formio-app-servicetracker",
+    "url": "https://formio.github.io/formio-app-servicetracker",
     "repo": "https://github.com/formio/formio-app-servicetracker"
   },
   "roles": {
