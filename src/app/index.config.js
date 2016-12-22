@@ -10,8 +10,11 @@
     toastrConfig,
     FormioProvider,
     FormioAuthProvider,
-    AppConfig
+    AppConfig,
+    $locationProvider
   ) {
+    $locationProvider.hashPrefix('');
+
     // Set the base url for formio.
     FormioProvider.setBaseUrl(AppConfig.apiUrl);
     FormioProvider.setAppUrl(AppConfig.appUrl);
