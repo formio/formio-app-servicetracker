@@ -1,0 +1,23 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Appointment</h3>
+  </div>
+  <div class="panel-body">
+    <p><strong>Appointment Time: </strong> {{ currentResource.resource.data.appointmentTime | date : 'medium' }}</p>
+    <p><strong>Assigned Contractor: </strong> {{ currentResource.resource.data.contractor.data.name }}</p>
+    <h2>{{ currentResource.resource.data.customer.name }}</h2>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Customer Information</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.customer.data.firstName }} {{ currentResource.resource.data.customer.data.lastName }}</li>
+          <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.customer.data.phoneNumber }}</li>
+          <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.customer.data.email }}</li>
+          <li class="list-group-item"><strong>Address:</strong> {{ currentResource.resource.data.customer.data.address.formatted_address }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

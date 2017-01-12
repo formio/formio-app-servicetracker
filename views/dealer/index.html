@@ -1,0 +1,3 @@
+
+<formio-grid src="currentResource.formUrl" columns="currentResource.columns" query="currentResource.gridQuery" grid-options="currentResource.gridOptions"></formio-grid><br/>
+<a ui-sref="{{ baseName }}Create()" class="btn btn-primary" ng-if="isReady && hasAccess(currentResource.name, 'create_own')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New {{ currentResource.name | capitalize }}</a>

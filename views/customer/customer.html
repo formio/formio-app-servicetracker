@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs">
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.view')}"><a ui-sref="dealer.customer.view()">View</a></li>
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.equipment')}"><a ui-sref="dealer.customer.equipmentIndex()">Equipment</a></li>
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.appointment')}"><a ui-sref="dealer.customer.appointmentIndex()">Appointments</a></li>
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.form')}"><a ui-sref="dealer.customer.formIndex()">Forms</a></li>
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.edit')}"><a ui-sref="dealer.customer.edit()">Edit</a></li>
+  <li role="presentation" ng-class="{active: isActive('dealer.customer.delete')}"><a ui-sref="dealer.customer.delete()">Delete</a></li>
+</ul>
+<div ui-view></div>

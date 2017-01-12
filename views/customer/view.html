@@ -1,0 +1,17 @@
+<h2>{{ currentResource.resource.data.name }}</h2>
+<p><strong>Address: </strong> {{ currentResource.resource.data.address.formatted_address }}</p>
+<p><strong>Status: </strong> {{ currentResource.resource.data.inactive ? 'Inactive' : 'Active' }}</p>
+<map ng-if="position" zoom="8" center="[{{ position.lat }}, {{ position.lng }}]"> <marker position="[{{ position.lat }}, {{ position.lng }}]" title="{{ currentResource.resource.data.address.formatted_address }}" visible></marker></map>
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Primary Contact Information</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.firstName }} {{ currentResource.resource.data.lastName }}</li>
+      <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.phoneNumber }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.email }}</li>
+    </ul>
+  </div>
+</div>

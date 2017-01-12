@@ -1,0 +1,27 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Time Entry</h3>
+  </div>
+  <div class="panel-body">
+    <p><strong>Time: </strong> {{ currentResource.resource.data.time | date : 'medium' }}</p>
+    <p><strong>Activity: </strong> {{ currentResource.resource.data.activity }}</p>
+    <p><strong>Contractor: </strong> {{ currentResource.resource.data.appointment.data.contractor.data.name }}</p>
+    <p><strong>Appointment: </strong> {{ currentResource.resource.data.appointment.data.appointmentTime | date : 'medium' }}</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Customer Information</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item"><strong>Name:</strong> {{ currentResource.resource.data.appointment.data.customer.data.firstName }} {{ currentResource.resource.data.appointment.data.customer.data.lastName }}</li>
+          <li class="list-group-item"><strong>Phone:</strong> {{ currentResource.resource.data.appointment.data.customer.data.phoneNumber }}</li>
+          <li class="list-group-item"><strong>Email:</strong> {{ currentResource.resource.data.appointment.data.customer.data.email }}</li>
+        </ul>
+      </div>
+    </div>
+    <div ng-if="currentResource.resource.data.location">
+      <p><strong>Location: </strong> {{currentResource.resource.data.location[0] }}, {{currentResource.resource.data.gpsLongitude[1] }}</p>
+      <map zoom="8" center="{{ currentResource.resource.data.location }}"> <marker position="{{ currentResource.resource.data.location }}" visible></marker></map>
+    </div>
+  </div>
+</div>
